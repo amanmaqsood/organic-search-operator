@@ -37,6 +37,22 @@ _Avoid_: Memory summary, status blob
 A history of practitioner or project hypotheses, their source, expected effect, safeguards, measurement window, and outcome.
 _Avoid_: Tips database, growth hacks
 
+**Recent intelligence brief**:
+A dated, source-attributed report of current audience questions, practitioner observations, competitor movement, and public discussion that may strengthen an opportunity.
+_Avoid_: Trend command, demand proof
+
+**Mutation envelope**:
+The project-approved boundary of reversible actions an automation may complete without requesting approval for each run.
+_Avoid_: Full access, unrestricted autonomy
+
+**Action budget**:
+The maximum number of independently deployable work items an automation may complete in one cycle.
+_Avoid_: Publishing quota, content target
+
 **Review-first**:
 The operating mode in which the skill may prepare and verify changes but needs approval before publishing or external mutations.
 _Avoid_: Fully autonomous, advisory-only
+
+**Autonomous-safe**:
+The opt-in operating mode in which one reversible work item may be authorized by the mutation envelope after every evidence, validation, deployment, and rollback gate passes.
+_Avoid_: Autopilot, permissionless mode

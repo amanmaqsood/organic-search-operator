@@ -16,4 +16,10 @@ Humanizer informed the fallback prose-pattern checklist. The preferred prose
 integration is the user's separately installed `prose-humanizer` skill. Neither
 dependency is fetched or updated during an SEO automation run.
 
-The corresponding license texts are included under `licenses/`.
+Last 30 Days is an optional, separately installed MIT-licensed companion used
+for recent public-discussion research. Its implementation and credentials are
+not bundled with this repository:
+https://github.com/mvanhorn/last30days-skill
+
+The license texts for the adapted NotFair and Humanizer projects are included
+under `licenses/`.

@@ -2,6 +2,21 @@
   "run_id": "2026-09-10-daily",
   "kind": "daily",
   "status": "completed",
+  "policy_mode": "autonomous_safe",
+  "recent_intelligence": {
+    "provider": "last30days",
+    "retrieved_at": "2026-09-10T01:00:00Z",
+    "age_hours": 0,
+    "coverage": "complete",
+    "artifact": ".organic-search/cache/recent-intelligence/2026-09-10.md"
+  },
+  "selected_action": {
+    "opportunity_id": "refresh-product-faq",
+    "authorization": "autonomous_safe_policy",
+    "action_count": 1,
+    "new_page_count": 0,
+    "rollback": "available"
+  },
   "evidence": {
     "gsc_final_data_through": "2026-09-07",
     "live_site_checked_at": "2026-09-10T07:00:00Z"

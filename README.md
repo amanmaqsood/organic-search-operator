@@ -10,7 +10,8 @@ reviewable improvements, notifies Bing through IndexNow, and maintains a quiet
 recurring improvement loop.
 
 It does not promise rankings, force indexing, mass-publish low-value articles,
-or push production changes without approval.
+or grant unrestricted production access. It is review-first by default and has
+an optional bounded autonomous mode for one reversible action per daily cycle.
 
 ## Explain it like I am ten
 
@@ -18,9 +19,12 @@ This skill is like a careful gardener for your website. First, it checks whether
 Google and Bing can find the site and whether anything is broken. Then it looks
 at which pages people already visit, finds good chances to improve them, and
 suggests useful new pages that connect to your main product page. It can prepare
-better words, links, titles, and technical fixes, but it asks before publishing
-important changes. Every day it checks whether the website is improving, keeps
-notes about what worked, and stops making new pages if the results get worse.
+better words, links, titles, and technical fixes. It also reads what customers
+and experts discussed during the last 30 days. Normally it asks before
+publishing. If you turn on its safe automatic mode, it may choose, test, publish,
+and check one small change by itself, then undo that change if the website
+breaks. Every day it keeps notes about what worked and stops making new pages if
+the results get worse.
 
 ## What it does
 
@@ -41,6 +45,10 @@ notes about what worked, and stops making new pages if the results get worse.
 - Notifies Bing and other participating engines through IndexNow after verified
   production changes.
 - Tracks practitioner tips as experiments instead of blindly applying them.
+- Consults the separately installed Last 30 Days skill during every scheduled
+  cycle and refreshes its research at least once per project-local day.
+- Offers opt-in `autonomous_safe` operation with a one-action budget, green
+  checks, live verification, and rollback.
 - Supports a quiet daily monitor, weekly work plan, and monthly full audit.
 
 ## SEO and GEO
@@ -60,6 +68,10 @@ checks and measurements.
 - Python 3.10 or newer for the bundled helper scripts.
 - Node.js only if you install through the `skills` CLI.
 - Google Cloud CLI for the optional direct Search Console script path.
+- The separately installed
+  [Last 30 Days skill](https://github.com/mvanhorn/last30days-skill) for recurring
+  recent-audience intelligence. Configure its sources interactively before
+  scheduling unattended runs.
 - Ownership or approved access to any site, Search Console property, DNS zone,
   or repository you ask the skill to change.
 
@@ -126,6 +138,31 @@ interactive installer or copy this repository manually to one of these paths:
 
 Restart or reload the agent after a manual installation.
 
+### Install the Last 30 Days companion
+
+For Codex and other Agent Skills hosts:
+
+```bash
+npx skills add mvanhorn/last30days-skill -g -a codex
+```
+
+For Claude Code, use its marketplace:
+
+```text
+/plugin marketplace add mvanhorn/last30days-skill
+/plugin install last30days
+```
+
+Claude Code can alternatively use:
+
+```bash
+npx skills add mvanhorn/last30days-skill -g -a claude-code
+```
+
+Run Last 30 Days interactively once and complete its permission preflight and
+source setup before creating an unattended SEO automation. Its agent mode then
+lets scheduled runs research without stopping for questions.
+
 ## Use it from your agent
 
 Invoke the skill explicitly:
@@ -151,6 +188,17 @@ find rank 5 to 20 opportunities, and prepare a reviewable refresh.
 ```text
 Use $organic-search-operator to configure its quiet daily monitor, weekly plan,
 and monthly audit for this project. Do not publish or push without approval.
+```
+
+Enable the recommended bounded autonomous mode after the deployment route and
+rollback path are confirmed:
+
+```text
+Use $organic-search-operator to validate this project's deployment and rollback
+readiness, enable autonomous_safe mode, and schedule the recurring cycle. On
+every run, consult $last30days, choose one strongest eligible action, test it,
+deploy it through the existing workflow, verify it live, and roll it back if
+verification fails. Never perform an action outside the mutation envelope.
 ```
 
 The host must provide a scheduler if you want unattended recurring execution.
@@ -184,6 +232,22 @@ Validate and inspect the secret-free state:
 python3 scripts/seo_operator.py validate --project /absolute/path/to/site
 python3 scripts/seo_operator.py status --project /absolute/path/to/site
 ```
+
+Switch between the two policy modes:
+
+```bash
+python3 scripts/seo_operator.py set-mode \
+  --project /absolute/path/to/site \
+  --mode autonomous_safe
+
+python3 scripts/seo_operator.py set-mode \
+  --project /absolute/path/to/site \
+  --mode review_first
+```
+
+Enabling the setting does not make an unready project deployable. Autonomous
+work still stops unless the starting worktree is clean, validation commands,
+deployment branch and adapter are known, and a commit-based rollback path exists.
 
 Append structured run and experiment records:
 
@@ -307,17 +371,35 @@ not proof that Bing indexed the URL.
 
 | Cycle | Default work |
 | --- | --- |
-| Daily at 07:00 project time | Quiet health monitor and queue update |
-| Weekly | Opportunity plan, refresh selection, zero to two reviewable drafts |
+| Daily at 07:00 project time | Recent intelligence, health monitor, queue update, and at most one eligible autonomous action |
+| Weekly | Opportunity plan and zero to two reviewable drafts; same-day recent research is reused |
 | Monthly | Full technical, content-drift, sitemap, provider, and practitioner audit |
 
-Daily work may inspect, measure, prioritize, draft, test, and prepare a review.
-Publishing, pushing, merging, deployment, DNS changes, new external properties,
-outreach, and first sitemap submissions require approval.
+Every cycle consults a Last 30 Days brief. It runs fresh research once per local
+day and may reuse it for weekly or monthly work later that day. Recent public
+discussion supports an opportunity but never replaces Search Console, site,
+conversion, or factual evidence.
+
+In `review_first`, the automation inspects, prioritizes, drafts, tests, and
+prepares a review. In `autonomous_safe`, it may complete one reversible action,
+including at most one new page, without asking the founder during that run.
+
+Autonomous-safe actions can refresh one page, publish one distinct supporting
+page, improve metadata/schema/media/internal links, fix an ordinary established
+canonical or crawl issue, deploy through the existing workflow, update the
+existing generated sitemap, and notify IndexNow for URLs verified live.
+
+It never autonomously changes DNS, ownership, accounts, credentials, billing,
+permissions, new external properties, first sitemap submission, destructive
+redirects or removals, migrations, sensitive claims, outreach, backlinks,
+directories, purchases, reviews, or endorsements.
 
 ## Safety model
 
-- Review-first changes by default.
+- Review-first by default; bounded autonomy is explicit per project.
+- One autonomous action and no more than one new page per daily cycle.
+- A failed autonomous deployment or live check triggers one bounded rollback
+  attempt and a clear alert if restoration fails.
 - No credentials in project configuration, logs, reports, or command output.
 - No doorway pages, content farms, fake reviews, fake awards, fabricated
   experience, paid-link schemes, or copied community posts.
@@ -375,4 +457,6 @@ adapted from [NotFair Plugin](https://github.com/nowork-studio/notfair-plugin),
 and fallback prose checks were informed by
 [Humanizer](https://github.com/blader/humanizer). Their MIT notices are retained
 under [`licenses/`](licenses/). The preferred prose integration is the user's
-separately installed `prose-humanizer` skill.
+separately installed `prose-humanizer` skill. Recent audience research is
+provided by the separately installed, MIT-licensed
+[Last 30 Days](https://github.com/mvanhorn/last30days-skill) companion.

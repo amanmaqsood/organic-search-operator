@@ -28,9 +28,13 @@ credentials in these files.
 - GSC property when confirmed
 - sitemap URL when confirmed
 - IndexNow key location when deployed
+- recent intelligence provider, 24-hour freshness rule, and failure behavior
+- policy mode and one-action autonomous budget
 
-`scripts/seo_operator.py init` creates a conservative starter. The user or agent
-must replace placeholders before provider mutations or publishing.
+`scripts/seo_operator.py init` creates a conservative review-first starter. The
+user or agent must replace placeholders before provider mutations or publishing.
+Use `seo_operator.py set-mode --mode autonomous_safe` only after the project has
+a known deployment route, validation commands, and rollback path.
 
 ## Content states
 
@@ -39,8 +43,11 @@ Use these states:
 `candidate -> planned -> drafting -> ready_for_review -> approved -> published`
 
 `blocked`, `rejected`, and `failed` may be entered from any non-published state.
-Only a user approval moves `ready_for_review` to `approved`. A successful live
-verification moves `approved` to `published`.
+In `review_first`, only user approval moves `ready_for_review` to `approved`. In
+`autonomous_safe`, a work item may make that transition when every mutation-
+envelope gate passes; record the authorization source as
+`autonomous_safe_policy`. A successful live verification moves `approved` to
+`published`.
 
 Preserve prior state and append transitions to a run record. Do not silently
 reopen rejected topics or reuse a published intent for a new URL.

@@ -5,3 +5,6 @@ does not publish or mutate external production state without approval. It finds
 5 to 10 opportunities rather than publishing a fixed number of pages, because a
 volume quota creates duplicate intent and scaled-content risk and makes business
 outcomes secondary to output count.
+
+This remains the default. ADR 0003 adds a separately enabled, one-action
+`autonomous_safe` exception without changing review-first projects.

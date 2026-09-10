@@ -30,7 +30,23 @@
     "monthly_day": 1,
     "max_opportunities_per_cycle": 10,
     "max_drafts_per_weekly_cycle": 2,
-    "quiet_when_unchanged": true
+    "quiet_when_unchanged": true,
+    "recent_intelligence": {
+      "provider": "last30days",
+      "required_each_cycle": true,
+      "max_age_hours": 24,
+      "agent_mode": true,
+      "failure_behavior": "maintenance_only"
+    },
+    "autonomy": {
+      "max_actions_per_daily_cycle": 1,
+      "max_new_pages_per_daily_cycle": 1,
+      "require_clean_worktree": true,
+      "require_green_checks": true,
+      "require_known_deployment_route": true,
+      "require_rollback_path": true,
+      "rollback_on_live_verification_failure": true
+    }
   },
   "policy": {
     "mode": "review_first",

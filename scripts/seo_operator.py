@@ -19,6 +19,7 @@ SCHEMA_VERSION = 1
 STATE_DIR = ".organic-search"
 SENSITIVE_KEY = re.compile(r"(?:token|secret|password|api[_-]?key|cookie|credential)", re.I)
 IANA_TIMEZONE_SHAPE = re.compile(r"^[A-Za-z_+-]+(?:/[A-Za-z0-9_.+-]+)+$")
+POLICY_MODES = ("review_first", "autonomous_safe")
 
 
 def utc_now() -> str:
@@ -96,6 +97,28 @@ def state_paths(project: Path) -> dict[str, Path]:
     }
 
 
+def recent_intelligence_defaults() -> dict:
+    return {
+        "provider": "last30days",
+        "required_each_cycle": True,
+        "max_age_hours": 24,
+        "agent_mode": True,
+        "failure_behavior": "maintenance_only",
+    }
+
+
+def autonomy_defaults() -> dict:
+    return {
+        "max_actions_per_daily_cycle": 1,
+        "max_new_pages_per_daily_cycle": 1,
+        "require_clean_worktree": True,
+        "require_green_checks": True,
+        "require_known_deployment_route": True,
+        "require_rollback_path": True,
+        "rollback_on_live_verification_failure": True,
+    }
+
+
 def initial_config(args: argparse.Namespace) -> dict:
     origin = normalize_origin(args.origin)
     landing_url = validate_landing_url(origin, args.landing_url)
@@ -135,6 +158,8 @@ def initial_config(args: argparse.Namespace) -> dict:
             "max_opportunities_per_cycle": 10,
             "max_drafts_per_weekly_cycle": 2,
             "quiet_when_unchanged": True,
+            "recent_intelligence": recent_intelligence_defaults(),
+            "autonomy": autonomy_defaults(),
         },
         "policy": {
             "mode": "review_first",
@@ -258,8 +283,50 @@ def validate_project(project: Path) -> list[str]:
         errors.append("automation.max_drafts_per_weekly_cycle must be between 0 and 2")
 
     policy = config.get("policy", {})
-    if policy.get("mode") != "review_first":
-        errors.append("policy.mode must be review_first")
+    mode = policy.get("mode")
+    if mode not in POLICY_MODES:
+        errors.append("policy.mode must be review_first or autonomous_safe")
+
+    recent = automation.get("recent_intelligence")
+    autonomy = automation.get("autonomy")
+    if recent is not None:
+        if not isinstance(recent, dict):
+            errors.append("automation.recent_intelligence must be an object")
+        else:
+            if recent.get("provider") != "last30days":
+                errors.append("automation.recent_intelligence.provider must be last30days")
+            if recent.get("required_each_cycle") is not True:
+                errors.append("automation.recent_intelligence.required_each_cycle must be true")
+            if recent.get("max_age_hours") != 24:
+                errors.append("automation.recent_intelligence.max_age_hours must be 24")
+            if recent.get("agent_mode") is not True:
+                errors.append("automation.recent_intelligence.agent_mode must be true")
+            if recent.get("failure_behavior") != "maintenance_only":
+                errors.append("automation.recent_intelligence.failure_behavior must be maintenance_only")
+    if autonomy is not None:
+        if not isinstance(autonomy, dict):
+            errors.append("automation.autonomy must be an object")
+        else:
+            if autonomy.get("max_actions_per_daily_cycle") != 1:
+                errors.append("automation.autonomy.max_actions_per_daily_cycle must be 1")
+            if autonomy.get("max_new_pages_per_daily_cycle") != 1:
+                errors.append("automation.autonomy.max_new_pages_per_daily_cycle must be 1")
+            for field in (
+                "require_clean_worktree",
+                "require_green_checks",
+                "require_known_deployment_route",
+                "require_rollback_path",
+                "rollback_on_live_verification_failure",
+            ):
+                if autonomy.get(field) is not True:
+                    errors.append(f"automation.autonomy.{field} must be true")
+    if mode == "autonomous_safe":
+        if not isinstance(recent, dict):
+            errors.append("autonomous_safe requires automation.recent_intelligence")
+        if not isinstance(autonomy, dict):
+            errors.append("autonomous_safe requires automation.autonomy")
+        if policy.get("require_human_review_for_sensitive_topics") is not True:
+            errors.append("autonomous_safe requires human review for sensitive topics")
 
     gsc_property = config.get("search_console", {}).get("property", "")
     if gsc_property and not (
@@ -297,12 +364,47 @@ def cmd_status(args: argparse.Namespace) -> int:
         "brand": config["project"]["brand"],
         "origin": config["project"]["canonical_origin"],
         "primary_landing_url": config["project"]["primary_landing_url"],
+        "policy_mode": config["policy"]["mode"],
+        "recent_intelligence": config.get("automation", {}).get(
+            "recent_intelligence", recent_intelligence_defaults()
+        ),
         "gsc_property": config["search_console"]["property"] or "unconfigured",
         "indexnow": state.get("provider_state", {}).get("indexnow", {}).get("status", "unknown"),
         "queue_size": len(state.get("queue", [])),
         "last_run": state.get("last_run"),
     }
     print(json.dumps(summary, indent=2))
+    return 0
+
+
+def cmd_set_mode(args: argparse.Namespace) -> int:
+    project = Path(args.project).resolve()
+    paths = state_paths(project)
+    errors = validate_project(project)
+    if errors:
+        raise ValueError("project validation failed: " + "; ".join(errors))
+    config = load_json(paths["config"])
+    automation = config.setdefault("automation", {})
+    automation.setdefault("recent_intelligence", recent_intelligence_defaults())
+    automation.setdefault("autonomy", autonomy_defaults())
+    policy = config.setdefault("policy", {})
+    policy["mode"] = args.mode
+    if args.mode == "autonomous_safe":
+        policy["require_human_review_for_sensitive_topics"] = True
+    atomic_json_write(paths["config"], config)
+    post_errors = validate_project(project)
+    if post_errors:
+        raise ValueError("updated project validation failed: " + "; ".join(post_errors))
+    print(
+        json.dumps(
+            {
+                "status": "updated",
+                "mode": args.mode,
+                "action_budget": automation["autonomy"]["max_actions_per_daily_cycle"],
+            },
+            indent=2,
+        )
+    )
     return 0
 
 
@@ -367,6 +469,11 @@ def build_parser() -> argparse.ArgumentParser:
     status = sub.add_parser("status", help="show a secret-free project summary")
     status.add_argument("--project", required=True)
     status.set_defaults(func=cmd_status)
+
+    set_mode = sub.add_parser("set-mode", help="select review-first or bounded autonomous operation")
+    set_mode.add_argument("--project", required=True)
+    set_mode.add_argument("--mode", required=True, choices=POLICY_MODES)
+    set_mode.set_defaults(func=cmd_set_mode)
 
     record_run = sub.add_parser("record-run", help="append a run record and update current state")
     record_run.add_argument("--project", required=True)

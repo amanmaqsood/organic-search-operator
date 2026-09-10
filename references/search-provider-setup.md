@@ -93,8 +93,10 @@ production deployment.
 5. Record response, URL count, and timestamp without logging credentials.
 
 Use `scripts/indexnow.py` in dry-run mode first. Add `--apply` only after the live
-deployment and approval. A successful response acknowledges submission, not
-indexing.
+deployment and either explicit review-first approval or authorization by every
+`autonomous_safe` gate. Autonomous use also requires IndexNow to have been
+enabled and verified before the run. A successful response acknowledges
+submission, not indexing.
 
 The Bing Webmaster URL Submission API may be used when an existing project
 already supports it, but IndexNow is the default. Respect quotas and prioritize

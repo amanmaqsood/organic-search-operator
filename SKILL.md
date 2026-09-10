@@ -6,8 +6,9 @@ description: >
   sitemaps, notify Bing through IndexNow, audit a site or repository, improve a
   landing page, build a supporting content cluster, create an organic-search
   plan, investigate indexing, mine GSC opportunities, refresh declining pages,
-  or configure a recurring SEO automation. Produces reviewable changes by
-  default and never promises rankings or indexing.
+  or configure a recurring SEO automation with optional bounded autonomy and
+  recent audience intelligence. Produces reviewable changes by default and
+  never promises rankings or indexing.
 ---
 
 # Organic Search Operator
@@ -21,10 +22,12 @@ conversions or revenue.
 - Read the repository instructions and `CONTEXT.md` before acting.
 - Preserve unrelated changes. Start repository work with status and recent
   history checks.
-- Work review-first: audits, plans, drafts, tests, and review branches are
-  allowed. Get explicit approval before publishing, pushing, changing DNS,
-  changing production SEO directives, creating external properties, or
-  submitting a new sitemap.
+- Work review-first unless project policy explicitly selects
+  `autonomous_safe`. In review-first mode, get explicit approval before
+  publishing, pushing, changing DNS, changing production SEO directives,
+  creating external properties, or submitting a new sitemap.
+- In `autonomous_safe`, complete at most one reversible work item inside the
+  configured mutation envelope. Never treat that mode as unrestricted access.
 - Never claim a URL is indexed because it was submitted. Never promise a rank,
   traffic level, or date.
 - Treat creator tips as hypotheses. Validate them against official guidance,
@@ -53,6 +56,7 @@ Read only the references needed for the selected route:
 - [GEO and entity guidance](references/geo-and-entity.md)
 - [Automation and state](references/automation-and-state.md)
 - [Automation prompt template](references/automation-prompt-template.md)
+- [Recent intelligence and autonomous action](references/recent-intelligence.md)
 - [Practitioner intelligence](references/practitioner-intelligence.md)
 - [Report contract](references/report-contract.md)
 
@@ -111,6 +115,8 @@ Collect evidence in this order:
 6. content inventory, duplication, cannibalization, decay, and orphan pages;
 7. optional Bing, AI-assisted search, backlink/entity, and
    practitioner-experiment evidence.
+8. a current Last 30 Days brief for scheduled cycles, treated as supporting
+   evidence rather than proof of demand.
 
 Produce a ranked queue. Prefer, in order:
 
@@ -138,11 +144,13 @@ gates.
    and citations are stable. Otherwise use the built-in fidelity checklist.
 6. Run project-specific formatting, content validation, build, link, schema,
    canonical, sitemap, and route checks.
-7. Present the diff and expected measurement plan. Do not publish or push without
-   approval.
-8. After an approved production deployment, verify the live URL. Notify IndexNow
-   for added, changed, or deleted canonical URLs. Submit a sitemap only when it
-   is new or materially changed and approved.
+7. Apply the configured policy. In `review_first`, present the diff and expected
+   measurement plan without publishing or pushing. In `autonomous_safe`, follow
+   [Recent intelligence and autonomous action](references/recent-intelligence.md)
+   and proceed only when every authorization gate passes.
+8. After an authorized production deployment, verify the live URL. Notify
+   IndexNow for added, changed, or deleted canonical URLs when it was already
+   enabled and verified. A first sitemap submission always requires approval.
 
 ## Automation setup
 
@@ -150,12 +158,17 @@ Follow [Automation and state](references/automation-and-state.md).
 Use [Automation prompt template](references/automation-prompt-template.md) as
 the base prompt when creating a project automation; resolve every placeholder
 from confirmed project configuration.
+For every scheduled cycle, follow
+[Recent intelligence and autonomous action](references/recent-intelligence.md).
 
 - Default rhythm: quiet daily monitor at 07:00 project-local time, weekly action
   plan and drafting batch, monthly full audit and baseline refresh.
 - Stay silent when daily state is unchanged and no action is required.
-- Daily work may inspect, measure, prioritize, draft, test, and prepare a review.
-  It may not publish, push, modify DNS, or make account changes without approval.
+- Every cycle must consult a Last 30 Days brief that is no more than 24 hours
+  old. Reuse the same-day brief instead of repeating paid or slow source calls.
+- Daily work in `review_first` may inspect, measure, prioritize, draft, test,
+  and prepare a review. In `autonomous_safe`, it may complete one eligible,
+  reversible action without per-run approval.
 - Read project state first and write an append-only run record before finishing.
 - Stop or slow content creation when indexation, duplication, engagement,
   conversion, or quality signals deteriorate.

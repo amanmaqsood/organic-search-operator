@@ -41,6 +41,8 @@ class BootstrapTests(unittest.TestCase):
             config = json.loads((Path(directory) / ".organic-search" / "config.json").read_text())
             self.assertEqual(config["project"]["canonical_origin"], "https://www.example.com")
             self.assertEqual(config["automation"]["max_drafts_per_weekly_cycle"], 2)
+            self.assertEqual(config["automation"]["recent_intelligence"]["provider"], "last30days")
+            self.assertEqual(config["automation"]["autonomy"]["max_actions_per_daily_cycle"], 1)
 
     def test_init_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -65,6 +67,40 @@ class BootstrapTests(unittest.TestCase):
             path.write_text(json.dumps(config), encoding="utf-8")
             errors = seo_operator.validate_project(Path(directory))
             self.assertTrue(any("prohibited secret-like keys" in item for item in errors))
+
+    def test_set_mode_enables_bounded_autonomy(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+                result = seo_operator.cmd_set_mode(
+                    argparse.Namespace(project=directory, mode="autonomous_safe")
+                )
+            self.assertEqual(result, 0)
+            config = json.loads((Path(directory) / ".organic-search" / "config.json").read_text())
+            self.assertEqual(config["policy"]["mode"], "autonomous_safe")
+            self.assertEqual(seo_operator.validate_project(Path(directory)), [])
+
+    def test_autonomous_action_budget_cannot_exceed_one(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+            path = Path(directory) / ".organic-search" / "config.json"
+            config = json.loads(path.read_text())
+            config["automation"]["autonomy"]["max_actions_per_daily_cycle"] = 2
+            path.write_text(json.dumps(config), encoding="utf-8")
+            errors = seo_operator.validate_project(Path(directory))
+            self.assertIn("automation.autonomy.max_actions_per_daily_cycle must be 1", errors)
+
+    def test_recent_intelligence_cannot_be_older_than_24_hours(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+            path = Path(directory) / ".organic-search" / "config.json"
+            config = json.loads(path.read_text())
+            config["automation"]["recent_intelligence"]["max_age_hours"] = 48
+            path.write_text(json.dumps(config), encoding="utf-8")
+            errors = seo_operator.validate_project(Path(directory))
+            self.assertIn("automation.recent_intelligence.max_age_hours must be 24", errors)
 
 
 class ProviderHelperTests(unittest.TestCase):

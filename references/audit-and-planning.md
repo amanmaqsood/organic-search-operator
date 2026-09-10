@@ -73,6 +73,11 @@ Each candidate needs:
 Rank by expected qualified impact, confidence, effort, reversibility, and risk.
 Do not rank by search volume alone.
 
+For scheduled work, incorporate the current
+[recent intelligence brief](recent-intelligence.md) without treating public
+discussion as proof of demand. Use the 100-point score and risk penalty defined
+there. Keep every component visible in the opportunity record.
+
 Use this order when scores are close:
 
 1. unblock crawling, indexing eligibility, or conversion;

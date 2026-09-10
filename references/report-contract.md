@@ -6,6 +6,7 @@ Report:
 
 - primary landing page and business metric;
 - evidence period and final complete provider date;
+- recent intelligence topic, retrieval time, age, source coverage, and artifact;
 - GSC property and availability state;
 - the top ranked opportunities, especially positions 5 to 20 and comparable
   weak-CTR pages;
@@ -17,6 +18,7 @@ Report:
 - IndexNow and optional Bing submission state;
 - experiments and backlink/entity audit state;
 - files changed, review artifact, commit, and deployment state when applicable;
+- policy mode, authorization source, action budget, and rollback state;
 - quota problems, approvals needed, and next queue.
 
 Use `unavailable` for missing data, not zero. Use `submitted` only for an

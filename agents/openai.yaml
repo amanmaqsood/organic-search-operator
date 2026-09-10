@@ -1,4 +1,4 @@
 interface:
   display_name: "Organic Search Operator"
-  short_description: "Audit, plan, draft, and monitor organic search growth"
-  default_prompt: "Use $organic-search-operator to bootstrap this project, audit its search health, and prepare the next reviewable growth actions."
+  short_description: "Audit and safely automate organic search growth"
+  default_prompt: "Use $organic-search-operator to audit this project, consult recent audience intelligence, and choose the next policy-authorized growth action."

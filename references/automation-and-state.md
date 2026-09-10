@@ -7,41 +7,58 @@
 - Monthly: full technical audit, sitemap reconciliation, content-drift review,
   provider baseline refresh, and practitioner-intelligence review.
 
-Projects may override the schedule in configuration. Prefer calendar schedules
-over an interval that drifts from the intended local time.
+Every scheduled cycle consults Last 30 Days research. Run it fresh once per
+project-local calendar day and reuse that brief for later cycles on the same day.
+Projects may override the schedule. Prefer calendar schedules over an interval
+that drifts from the intended local time.
 
 ## Daily run
 
 1. Read repository instructions, project config, state, last run, queue, and
    experiment ledger.
 2. Inspect working-tree status and recent commits. Do not overwrite user work.
-3. Fetch only data needed to detect material change. Respect cache age, API
-   quotas, final complete dates, and provider failures.
-4. Check deployment health, primary landing page, sitemap, robots, priority
+3. Consult the current recent intelligence brief. Run `$last30days` in agent
+   mode when the cached brief is absent, over 24 hours old, or about a different
+   project topic. Follow [Recent intelligence and autonomous action](recent-intelligence.md).
+4. Fetch the remaining data needed to detect material change. Respect cache
+   age, API quotas, final complete dates, and provider failures.
+5. Check deployment health, primary landing page, sitemap, robots, priority
    index states, rank 5 to 20 opportunities, high-impression weak-CTR pages, and
    material declines.
-5. Re-rank the queue. Refresh before creating new pages.
-6. If the run is a weekly drafting run, prepare zero to two work items that pass
-   every gate.
-7. Run validations. Prepare a review branch or patch when appropriate.
-8. Append the run record atomically and update current state.
-9. Notify only for a meaningful change, completed review artifact, failure,
-   quota problem, or required user action.
+6. Re-rank the queue using qualified impact, project evidence, recent
+   intelligence, landing-page support, confidence, reversibility, and risk.
+7. Apply the configured policy. In `review_first`, prepare the appropriate
+   review artifact. In `autonomous_safe`, select and complete at most one
+   eligible work item, including at most one new page.
+8. Run validations and, when authorized, deploy and verify the focused change.
+   Roll it back when deployment or live verification fails.
+9. Append the run record atomically and update current state.
+10. Notify only for a meaningful change, completed review artifact or
+    autonomous action, failure, quota problem, rollback, or required user action.
 
 ## External actions
 
-The automation may automatically read provider data and notify IndexNow only
-for an already approved, verified deployment when the project configuration
-explicitly enables that behavior.
+The automation may always read already authorized provider data. In
+`review_first`, external mutations retain the approval rules below. In
+`autonomous_safe`, the narrow mutation envelope in
+[Recent intelligence and autonomous action](recent-intelligence.md) authorizes
+one reversible action, its existing deployment workflow, and an IndexNow notice
+for verified canonical URLs when IndexNow was configured in advance.
 
-Require approval for:
+Always require approval for:
 
 - DNS changes;
 - new external properties or permissions;
-- sitemap mutation or first submission;
-- publishing, pushing, merging, or production deployment;
-- new directory, profile, PR, outreach, or backlink submissions;
-- destructive URL removal or redirect changes.
+- sitemap first submission;
+- new directory, profile, outreach, or backlink submissions;
+- destructive URL removal, redirect, domain, or URL migration changes;
+- purchases, billing, credentials, ownership, or account changes.
+
+In `review_first`, also require approval for sitemap mutation, publishing,
+pushing, merging, and production deployment. In `autonomous_safe`, those actions
+do not need per-run approval only when every autonomous gate passes. A first
+sitemap submission and the always-forbidden actions remain outside the mutation
+envelope in both modes.
 
 ## Run record
 
@@ -49,14 +66,18 @@ Include:
 
 - run ID, kind, start/end time, evidence dates, and commit base;
 - provider availability and quotas;
+- recent intelligence topic, retrieval time, age, coverage, and artifact;
 - GSC setup and property state;
 - opportunities added, changed, rejected, or blocked;
+- opportunity score components and authorization source;
 - pages drafted, refreshed, approved, published, and verified;
 - metadata, links, schema, sitemap, and CTA changes;
 - build and validation results;
 - Google sitemap and inspection outcomes;
 - IndexNow and optional Bing outcomes;
 - experiment updates;
+- autonomous action count, new-page count, commit, deployment, live
+  verification, and rollback;
 - blockers, approvals needed, and next queue.
 
 Record external states as `proposed`, `pending`, `completed`, `failed`, or
@@ -68,4 +89,5 @@ Default to audit-only. Check known profiles, earned mentions, submitted entries,
 platform messages, and provider backlink data. New opportunity discovery is
 opt-in and limited to legitimate product profiles, relevant directories,
 partner/resource pages, and earned media. Every candidate needs a relevance and
-risk rationale and requires approval before submission or outreach.
+risk rationale. Submission or outreach always requires approval and is never in
+the autonomous-safe mutation envelope.

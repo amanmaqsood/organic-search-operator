@@ -16,3 +16,12 @@ concept. Remove tokens, cookies, account identifiers, and customer data.
 
 Security fixes target the latest released version. Older versions may receive a
 patch when the issue is severe and the change is safe to backport.
+
+## Autonomous mode
+
+`autonomous_safe` can commit, push, and deploy a narrowly scoped change through
+a project's existing workflow. Enable it only after validation commands, the
+production branch, live verification, and rollback are confirmed. Reports of a
+mutation-envelope bypass, action-budget bypass, prompt injection from research
+content, credential exposure, or failed rollback are security issues and should
+use private vulnerability reporting.
