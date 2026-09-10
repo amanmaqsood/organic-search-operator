@@ -1,0 +1,55 @@
+# Project contract
+
+Use `.organic-search/` as the portable project state directory.
+
+## Files
+
+- `config.json`: public project configuration and detected adapters.
+- `state.json`: current baselines, content queue, provider state, and latest run.
+- `runs.jsonl`: append-only run records.
+- `experiments.jsonl`: append-only practitioner and project experiments.
+- `cache/`: replaceable provider responses. Do not commit by default.
+
+Never store access tokens, cookies, OAuth client secrets, Bing API keys, or DNS
+credentials in these files.
+
+## Required configuration
+
+- schema version
+- brand
+- canonical HTTPS origin
+- primary landing URL on that origin
+- conversion event
+- IANA timezone
+- primary markets and languages
+- regulated-topic classification
+- content source of truth
+- build and validation commands when detected
+- GSC property when confirmed
+- sitemap URL when confirmed
+- IndexNow key location when deployed
+
+`scripts/seo_operator.py init` creates a conservative starter. The user or agent
+must replace placeholders before provider mutations or publishing.
+
+## Content states
+
+Use these states:
+
+`candidate -> planned -> drafting -> ready_for_review -> approved -> published`
+
+`blocked`, `rejected`, and `failed` may be entered from any non-published state.
+Only a user approval moves `ready_for_review` to `approved`. A successful live
+verification moves `approved` to `published`.
+
+Preserve prior state and append transitions to a run record. Do not silently
+reopen rejected topics or reuse a published intent for a new URL.
+
+## Idempotency
+
+- Normalize canonical origins and URLs before comparison.
+- Use URL plus intent as a work-item identity.
+- Use date plus run kind as a run identity.
+- Do not resubmit unchanged sitemaps on every run.
+- Notify IndexNow only for canonical URLs changed since the last successful
+  notification.

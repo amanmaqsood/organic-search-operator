@@ -1,0 +1,14 @@
+{
+  "experiment_id": "internal-links-to-primary-landing-page-v1",
+  "claim": "Adding relevant contextual links from supporting pages may improve discovery and qualified visits.",
+  "source": {
+    "type": "practitioner_tip",
+    "url": "https://example.com/source",
+    "published_at": "2026-09-01"
+  },
+  "official_guidance_check": "compatible",
+  "expected_metric": "qualified_signup",
+  "risk": "low",
+  "stop_condition": "Revert if links reduce task clarity or conversion quality.",
+  "status": "planned"
+}

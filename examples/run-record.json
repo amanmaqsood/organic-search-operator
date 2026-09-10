@@ -1,0 +1,13 @@
+{
+  "run_id": "2026-09-10-daily",
+  "kind": "daily",
+  "status": "completed",
+  "evidence": {
+    "gsc_final_data_through": "2026-09-07",
+    "live_site_checked_at": "2026-09-10T07:00:00Z"
+  },
+  "changes": [],
+  "approvals_needed": [],
+  "blockers": [],
+  "next_queue": []
+}

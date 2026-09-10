@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "project": {
+    "brand": "Example Brand",
+    "canonical_origin": "https://www.example.com",
+    "primary_landing_url": "https://www.example.com/product",
+    "conversion_event": "qualified_signup",
+    "timezone": "Asia/Kolkata",
+    "markets": ["India", "United States"],
+    "languages": ["en"],
+    "regulated_topics": []
+  },
+  "site": {
+    "content_source": "detect",
+    "build_command": "detect",
+    "validation_commands": [],
+    "deployment_branch": "detect"
+  },
+  "search_console": {
+    "property": "sc-domain:example.com",
+    "sitemap_url": "https://www.example.com/sitemap.xml"
+  },
+  "indexnow": {
+    "enabled_after_approval": false,
+    "key_location": ""
+  },
+  "automation": {
+    "daily_local_time": "07:00",
+    "weekly_day": "Monday",
+    "monthly_day": 1,
+    "max_opportunities_per_cycle": 10,
+    "max_drafts_per_weekly_cycle": 2,
+    "quiet_when_unchanged": true
+  },
+  "policy": {
+    "mode": "review_first",
+    "backlink_discovery": false,
+    "require_human_review_for_sensitive_topics": true,
+    "preferred_prose_skill": "prose-humanizer"
+  }
+}
