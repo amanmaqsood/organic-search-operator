@@ -22,8 +22,10 @@ Start with repository status and recent commits. Detect the source-of-truth
 content system and existing project commands. Never edit generated output when a
 generator or source model owns it.
 
-On the first scheduled run, create the machine-readable discovery set required
-by machine-readable-discovery.md. Detect and configure the public source
+On the first scheduled run, or the first run after a skill upgrade when the
+machine-readable configuration, manifest, ownership state, or any required file
+is missing, create the discovery set required by
+machine-readable-discovery.md. Detect and configure the public source
 directory, build .organic-search/machine-readable.json only from verified
 public canonical indexable content, then generate llms.txt, llms-full.txt, and
 experimental ai.txt. Never use placeholders, private or noindex content, or an

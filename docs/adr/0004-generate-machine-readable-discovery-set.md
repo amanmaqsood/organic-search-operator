@@ -1,8 +1,9 @@
 # Generate all three discovery files on the first automation run
 
 Every project creates `llms.txt`, `llms-full.txt`, and experimental `ai.txt`
-from a reviewed public canonical-content manifest on its first automation run,
-then updates generator-owned files only when that source changes. This accepts
+from a reviewed public canonical-content manifest on its first automation run;
+an upgraded project missing any part uses the same route on its next eligible
+run. It then updates generator-owned files only when that source changes. This accepts
 the maintenance cost of three public files to provide one predictable
 machine-readable layer across projects, while explicitly rejecting any ranking
 promise: Google says it ignores these files, `ai.txt` has no universal platform

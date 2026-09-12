@@ -1,8 +1,9 @@
 # Machine-readable discovery set
 
-Use this route on the first automation run and whenever canonical public
-content changes. The required set is `llms.txt`, `llms-full.txt`, and `ai.txt`
-at the deployed origin root.
+Use this route on the first automation run, on the first run after upgrading
+when its configuration, manifest, state, or any required file is missing, and
+whenever canonical public content changes. The required set is `llms.txt`,
+`llms-full.txt`, and `ai.txt` at the deployed origin root.
 
 These files are an accessibility and discovery layer for compatible agents.
 They are not a Google ranking factor, a substitute for crawlable HTML,

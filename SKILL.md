@@ -82,8 +82,9 @@ Read only the references needed for the selected route:
 4. Validate the result with `seo_operator.py validate --project <repo>`.
 5. Record detected commands and adapters in `.organic-search/config.json`.
    Store no secrets there.
-6. On the first automation run, detect the public source directory, build the
-   verified public-content manifest, and follow
+6. On the first automation run, or the first post-upgrade run missing any part
+   of the discovery set, detect the public source directory, build the verified
+   public-content manifest, and follow
    [Machine-readable discovery set](references/machine-readable-discovery.md)
    to generate `llms.txt`, `llms-full.txt`, and experimental `ai.txt`.
 
@@ -179,8 +180,9 @@ On the first scheduled run and after relevant canonical content changes, follow
 - Stay silent when daily state is unchanged and no action is required.
 - Every cycle must consult a Last 30 Days brief that is no more than 24 hours
   old. Reuse the same-day brief instead of repeating paid or slow source calls.
-- The first run creates all three machine-readable discovery files. Later runs
-  update them only when their verified canonical source changes.
+- The first run creates all three machine-readable discovery files. An existing
+  project missing any part bootstraps it on the next eligible run. Later runs
+  update files only when their verified canonical source changes.
 - Daily work in `review_first` may inspect, measure, prioritize, draft, test,
   and prepare a review. In `autonomous_safe`, it may complete one eligible,
   reversible action without per-run approval.

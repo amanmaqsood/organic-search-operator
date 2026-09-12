@@ -4,6 +4,11 @@ All notable changes follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-09-12
+
+- Added a post-upgrade bootstrap rule so existing projects missing any part of
+  the three-file discovery set create it on their next eligible run.
+
 ## [1.3.0] - 2026-09-12
 
 - Added first-run generation and change-aware maintenance for `llms.txt`,
@@ -52,7 +57,8 @@ All notable changes follow [Semantic Versioning](https://semver.org/).
 - Added practitioner experiment intake and `prose-humanizer` integration.
 - Added Codex, Claude Code, and manual installation guidance.
 
-[Unreleased]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.0.0...v1.1.0

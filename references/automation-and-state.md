@@ -12,9 +12,12 @@ project-local calendar day and reuse that brief for later cycles on the same day
 Projects may override the schedule. Prefer calendar schedules over an interval
 that drifts from the intended local time.
 
-## First scheduled run
+## First scheduled run or missing-set migration
 
-Complete the normal provider and repository preflight, then establish the
+Complete this route when the project is new or when an upgraded project lacks
+the machine-readable configuration, manifest, ownership state, or any of the
+three required files. Complete the normal provider and repository preflight,
+then establish the
 [machine-readable discovery set](machine-readable-discovery.md). Detect the
 framework's public source directory, build a manifest from verified public,
 canonical, indexable content, and generate `llms.txt`, `llms-full.txt`, and

@@ -52,8 +52,9 @@ the results get worse.
   useful programmatic page families, free tools, directories, durable product
   pages, internal graphs, and agent-facing product capabilities.
 - Generates `llms.txt`, `llms-full.txt`, and experimental `ai.txt` from verified
-  public canonical content on the first automation run, then keeps
-  generator-owned files synchronized when that source changes.
+  public canonical content on the first automation run—or the next eligible run
+  for an upgraded project missing them—then keeps generator-owned files
+  synchronized when that source changes.
 - Consults the separately installed Last 30 Days skill during every scheduled
   cycle and refreshes its research at least once per project-local day.
 - Offers opt-in `autonomous_safe` operation with a one-action budget, green
@@ -421,7 +422,9 @@ directories, purchases, reviews, or endorsements.
 
 ## Machine-readable discovery files
 
-The first scheduled run creates all three origin-root files:
+The first scheduled run creates all three origin-root files. An existing project
+missing the configuration, manifest, ownership state, or any required file
+enters the same bootstrap route on its next eligible run.
 
 | File | Role |
 | --- | --- |
