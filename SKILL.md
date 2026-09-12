@@ -57,7 +57,7 @@ Read only the references needed for the selected route:
 - [Automation and state](references/automation-and-state.md)
 - [Automation prompt template](references/automation-prompt-template.md)
 - [Recent intelligence and autonomous action](references/recent-intelligence.md)
-- [Practitioner intelligence](references/practitioner-intelligence.md)
+- [Practitioner intelligence and PT-01 through PT-10 decision checks](references/practitioner-intelligence.md)
 - [Report contract](references/report-contract.md)
 
 ## Bootstrap
@@ -117,6 +117,8 @@ Collect evidence in this order:
    practitioner-experiment evidence.
 8. a current Last 30 Days brief for scheduled cycles, treated as supporting
    evidence rather than proof of demand.
+9. practitioner-derived PT-01 through PT-10 checks, with unsupported numeric and
+   causal claims rejected rather than converted into quotas.
 
 Produce a ranked queue. Prefer, in order:
 
@@ -160,6 +162,9 @@ the base prompt when creating a project automation; resolve every placeholder
 from confirmed project configuration.
 For every scheduled cycle, follow
 [Recent intelligence and autonomous action](references/recent-intelligence.md).
+Apply the decision checks in
+[Practitioner intelligence](references/practitioner-intelligence.md) when
+building and selecting from the queue.
 
 - Default rhythm: quiet daily monitor at 07:00 project-local time, weekly action
   plan and drafting batch, monthly full audit and baseline refresh.
@@ -172,6 +177,8 @@ For every scheduled cycle, follow
 - Read project state first and write an append-only run record before finishing.
 - Stop or slow content creation when indexation, duplication, engagement,
   conversion, or quality signals deteriorate.
+- Never turn practitioner numbers into automatic thresholds unless current
+  official guidance or project evidence validates them for this project.
 - When the host offers a scheduler, use its supported automation mechanism. For
   local repository work, prefer a project-scoped recurring task. Do not handwrite
   scheduler directives when a scheduling tool is available.

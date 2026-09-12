@@ -45,6 +45,9 @@ the results get worse.
 - Notifies Bing and other participating engines through IndexNow after verified
   production changes.
 - Tracks practitioner tips as experiments instead of blindly applying them.
+- Applies ten practitioner-derived decision checks for claim specificity,
+  comparisons, refreshes, internal links, buyer questions, non-branded growth,
+  early answers, buyer guides, situation pages, and responsible consistency.
 - Consults the separately installed Last 30 Days skill during every scheduled
   cycle and refreshes its research at least once per project-local day.
 - Offers opt-in `autonomous_safe` operation with a one-action budget, green
@@ -380,6 +383,15 @@ day and may reuse it for weekly or monthly work later that day. Recent public
 discussion supports an opportunity but never replaces Search Console, site,
 conversion, or factual evidence.
 
+The daily queue also runs the `PT-01` through `PT-10` practitioner checks. These
+capture the useful ideas behind popular SEO advice without copying unsupported
+promises into the automation. For example, the operator can prefer a strong
+refresh, find contextual internal links, separate branded from non-branded
+growth, or test a fair comparison page. It will not assume a comparison page is
+worth nine times more, demand 20 to 30 links, enforce a word-count rule, or
+publish just to look active. See
+[Practitioner intelligence](references/practitioner-intelligence.md).
+
 In `review_first`, the automation inspects, prioritizes, drafts, tests, and
 prepares a review. In `autonomous_safe`, it may complete one reversible action,
 including at most one new page, without asking the founder during that run.
@@ -404,6 +416,8 @@ directories, purchases, reviews, or endorsements.
 - No doorway pages, content farms, fake reviews, fake awards, fabricated
   experience, paid-link schemes, or copied community posts.
 - No fixed publishing quota.
+- No magic numeric thresholds copied from practitioner posts without project
+  validation.
 - Sensitive medical, financial, legal, safety, pregnancy, childcare, and similar
   topics require stronger sources and human review.
 - Practitioner posts enter an experiment ledger. They are not treated as facts.

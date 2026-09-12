@@ -68,6 +68,25 @@ deployment, or rollback risk. A blocking crawl, indexability, security, or
 conversion failure may override the score. When scores tie, prefer an existing
 page refresh, then internal-link or technical work, then a new page.
 
+Apply the PT-01 through PT-10 checks in practitioner-intelligence.md before
+selecting the action. Audit vague claims, but add a number only when it is real,
+scoped, dated, and sourced. Evaluate comparison and best-tools content as
+commercial-intent experiments, never as guaranteed winners. Prefer a materially
+useful refresh over a duplicate page. Add only relevant contextual internal
+links, with no fixed link quota. Research specific buyer questions without a
+fixed query length. Track branded and non-branded qualified performance
+separately while retaining total and conversion context. Put a clear qualified
+answer early when the page is question-led. Create buyer-situation pages only
+when they have distinct needs, proof, and value. Publish on evidence and quality,
+not to satisfy a cadence or keep a model from forgetting the brand.
+
+Do not repeat the practitioner post's unsupported constants or causal claims as
+facts: no assumed 9x comparison-page return, 10-to-15-position refresh jump,
+20-to-30-link target, 23-word query target, 100-word answer cutoff, claim that a
+top-ranked listicle trains ChatGPT, or claim that silence makes a model forget a
+brand. Log them as unverified source claims if they are material to an
+experiment.
+
 For prose, stabilize facts and citations first. Prefer $prose-humanizer in
 embedded mode when it is available. Preserve all claims, citations, links,
 names, numbers, dates, modality, chronology, causality, limitations, safety
@@ -126,8 +145,9 @@ the exact failure and safest manual recovery step.
 Append an atomic run record before finishing. Include evidence dates, provider
 states, ranked opportunities, changes proposed, validations, approvals needed,
 submission states, experiments, blockers, authorization source, action budget,
-commit, deployment, live verification, rollback, and the next queue. Update
-current state without erasing history. Report only meaningful changes,
+applicable practitioner check IDs, rejected claims, commit, deployment, live
+verification, rollback, and the next queue. Update current state without erasing
+history. Report only meaningful changes,
 completed review artifacts or autonomous actions, failures, rollbacks, quota
 problems, or required user actions.
 ```

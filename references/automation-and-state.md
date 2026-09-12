@@ -25,15 +25,20 @@ that drifts from the intended local time.
 5. Check deployment health, primary landing page, sitemap, robots, priority
    index states, rank 5 to 20 opportunities, high-impression weak-CTR pages, and
    material declines.
-6. Re-rank the queue using qualified impact, project evidence, recent
+6. Apply the `PT-01` through `PT-10` practitioner-derived checks. Look for
+   unsupported vague claims, useful refreshes, missing contextual links,
+   specific buyer questions, qualified non-branded growth, early-answer clarity,
+   defensible comparisons, and genuinely distinct buyer situations. Treat every
+   observation as a hypothesis until project evidence supports it.
+7. Re-rank the queue using qualified impact, project evidence, recent
    intelligence, landing-page support, confidence, reversibility, and risk.
-7. Apply the configured policy. In `review_first`, prepare the appropriate
+8. Apply the configured policy. In `review_first`, prepare the appropriate
    review artifact. In `autonomous_safe`, select and complete at most one
    eligible work item, including at most one new page.
-8. Run validations and, when authorized, deploy and verify the focused change.
+9. Run validations and, when authorized, deploy and verify the focused change.
    Roll it back when deployment or live verification fails.
-9. Append the run record atomically and update current state.
-10. Notify only for a meaningful change, completed review artifact or
+10. Append the run record atomically and update current state.
+11. Notify only for a meaningful change, completed review artifact or
     autonomous action, failure, quota problem, rollback, or required user action.
 
 ## External actions
@@ -76,6 +81,8 @@ Include:
 - Google sitemap and inspection outcomes;
 - IndexNow and optional Bing outcomes;
 - experiment updates;
+- applicable practitioner check IDs, verification state, and rejected numeric
+  or causal claims;
 - autonomous action count, new-page count, commit, deployment, live
   verification, and rollback;
 - blockers, approvals needed, and next queue.

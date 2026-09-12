@@ -6,7 +6,12 @@
     "url": "https://example.com/source",
     "published_at": "2026-09-01"
   },
+  "practitioner_check_ids": ["PT-04"],
   "official_guidance_check": "compatible",
+  "verification_state": "project_evidence_required",
+  "rejected_source_claims": [
+    "A fixed number of internal links applies to every page."
+  ],
   "expected_metric": "qualified_signup",
   "risk": "low",
   "stop_condition": "Revert if links reduce task clarity or conversion quality.",

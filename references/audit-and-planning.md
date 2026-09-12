@@ -33,9 +33,11 @@ project documents an exception.
 
 ### Search performance
 
-Segment branded and non-branded queries with an explicit brand-term list.
-Evaluate query and page together before assigning an intent. Inspect country and
-device differences when they could change the recommended action.
+Segment branded and non-branded queries using the provider's classification when
+available, with an explicit brand-term fallback. Record which method was used
+and its limitations. Evaluate query and page together before assigning an
+intent. Inspect country and device differences when they could change the
+recommended action.
 
 Look for:
 
@@ -48,6 +50,16 @@ Look for:
 - queries with no page that directly satisfies their intent;
 - multiple pages competing for the same intent;
 - indexed pages with no useful impressions and no conversion role.
+
+Track total, branded, and non-branded results separately. Qualified non-branded
+clicks and conversions are useful acquisition measures, but they do not replace
+brand demand, total search health, conversion quality, or revenue.
+
+Apply the `PT-01` through `PT-10` checks in
+[Practitioner intelligence](practitioner-intelligence.md) to the queue. For
+each applicable check, retain the project evidence, competing explanation,
+expected metric, review date, and stop condition. Do not add points merely
+because a tip is popular or came from a recognized practitioner.
 
 Thresholds are defaults, not universal truths. Scale them to the site's data
 volume and record any change.

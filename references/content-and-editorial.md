@@ -27,8 +27,26 @@ Use only verified claims. Never invent first-hand experience, customer results,
 rankings, comparisons, quotes, reviews, awards, or statistics. Clearly label
 hypotheses and estimates.
 
+Audit claims for specificity, but do not force every claim into a number. A
+numeric claim must identify what was measured, for whom, over what period, and
+where the evidence lives. When proof is absent, replace vague hype with a
+precise qualitative statement or mark the claim for founder review.
+
+For question-led pages, provide the useful answer early and qualify it as the
+topic requires. Do not enforce an arbitrary first-100-words rule, especially
+when safety, legal, or factual context is necessary.
+
 Use comparison, alternative, location, and programmatic pages only when each URL
 has independently useful content. Variable substitution is not unique value.
+
+Comparison, alternatives, and best-tools pages also require transparent
+selection criteria, current verifiable facts, balanced treatment, and disclosure
+of the publisher's relationship to the products. Never present estimated
+traffic value as revenue or claim that an AI system will repeat the page.
+
+Industry, budget, role, and use-case pages must address materially different
+buyer needs with distinct proof and examples. If the answer would mostly repeat
+another page, add a section to that page instead.
 
 Reddit-intent pages are controlled experiments. Check GSC and the current SERP
 first. Prefer adding a useful section to an existing page. Do not copy posts or
@@ -73,3 +91,7 @@ Verify metadata, canonical, structured data when eligible, accessible media,
 internal links in both directions, CTA alignment, mobile rendering, source
 quality, build output, and live behavior. Preserve facts and citations through
 all generators.
+
+For internal links, choose existing pages whose readers genuinely benefit from
+the destination and use descriptive natural anchors. There is no universal link
+count. Record the source URLs so the change can be reviewed and measured.
