@@ -24,6 +24,15 @@
     "enabled_after_approval": false,
     "key_location": ""
   },
+  "machine_readable": {
+    "create_on_first_run": true,
+    "update_when_source_changes": true,
+    "required_files": ["llms.txt", "llms-full.txt", "ai.txt"],
+    "manifest_path": ".organic-search/machine-readable.json",
+    "output_directory": "public",
+    "max_full_bytes": 1000000,
+    "ai_txt_status": "experimental_nonstandard"
+  },
   "automation": {
     "daily_local_time": "07:00",
     "weekly_day": "Monday",

@@ -1,4 +1,4 @@
 interface:
   display_name: "Organic Search Operator"
-  short_description: "Audit and safely automate organic search growth"
-  default_prompt: "Use $organic-search-operator to audit this project, consult recent audience intelligence, and choose the next policy-authorized growth action."
+  short_description: "Audit and safely automate search and agent discovery"
+  default_prompt: "Use $organic-search-operator to bootstrap or audit this project, maintain its machine-readable discovery files, consult recent audience intelligence, and choose the next policy-authorized growth action."

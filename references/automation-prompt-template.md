@@ -22,6 +22,23 @@ Start with repository status and recent commits. Detect the source-of-truth
 content system and existing project commands. Never edit generated output when a
 generator or source model owns it.
 
+On the first scheduled run, create the machine-readable discovery set required
+by machine-readable-discovery.md. Detect and configure the public source
+directory, build .organic-search/machine-readable.json only from verified
+public canonical indexable content, then generate llms.txt, llms-full.txt, and
+experimental ai.txt. Never use placeholders, private or noindex content, or an
+unknown output directory. Do not overwrite an unmanaged or manually diverged
+file. In review_first, prepare the validated files for review. In
+autonomous_safe, the coordinated set counts as one work item and may deploy only
+when every mutation gate passes.
+
+On later runs, check the manifest against the canonical content source and run
+the machine-readable checker. Regenerate only when included facts, pricing,
+availability, URLs, indexability, policies, or substantive content changed.
+After an authorized deployment, verify HTTP 200 and contents for /llms.txt,
+/llms-full.txt, and /ai.txt. Never describe these files as Google ranking
+signals or guarantees of AI discovery, citation, or recommendation.
+
 Every cycle must consult $last30days in non-interactive agent mode. Complete its
 interactive setup and source permissions before scheduling this task. Build the
 research topic from the product category, customer problem, audience, market,
@@ -68,7 +85,7 @@ deployment, or rollback risk. A blocking crawl, indexability, security, or
 conversion failure may override the score. When scores tie, prefer an existing
 page refresh, then internal-link or technical work, then a new page.
 
-Apply the PT-01 through PT-10 checks in practitioner-intelligence.md before
+Apply the PT-01 through PT-18 checks in practitioner-intelligence.md before
 selecting the action. Audit vague claims, but add a number only when it is real,
 scoped, dated, and sourced. Evaluate comparison and best-tools content as
 commercial-intent experiments, never as guaranteed winners. Prefer a materially
@@ -86,6 +103,14 @@ facts: no assumed 9x comparison-page return, 10-to-15-position refresh jump,
 top-ranked listicle trains ChatGPT, or claim that silence makes a model forget a
 brand. Log them as unverified source claims if they are material to an
 experiment.
+
+For PT-11 through PT-18, treat optional Ahrefs data as a separate supporting
+provider, evaluate page families with sparse and rich records, and require real
+utility for free tools, directories, leaderboards, permanent product pages, and
+agent-facing APIs or interfaces. Do not generate maker, country, category, tag,
+alternative, technology, or archive pages merely because the data model permits
+them. Require unique public value, lifecycle rules, crawl controls, and a useful
+internal-link relationship for every indexable page.
 
 For prose, stabilize facts and citations first. Prefer $prose-humanizer in
 embedded mode when it is available. Preserve all claims, citations, links,
@@ -145,9 +170,10 @@ the exact failure and safest manual recovery step.
 Append an atomic run record before finishing. Include evidence dates, provider
 states, ranked opportunities, changes proposed, validations, approvals needed,
 submission states, experiments, blockers, authorization source, action budget,
-applicable practitioner check IDs, rejected claims, commit, deployment, live
-verification, rollback, and the next queue. Update current state without erasing
-history. Report only meaningful changes,
+applicable practitioner check IDs, rejected claims, machine-readable source and
+output hashes, file conflicts, commit, deployment, live verification, rollback,
+and the next queue. Update current state without erasing history. Report only
+meaningful changes,
 completed review artifacts or autonomous actions, failures, rollbacks, quota
 problems, or required user actions.
 ```

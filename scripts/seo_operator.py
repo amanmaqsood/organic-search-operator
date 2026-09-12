@@ -20,6 +20,7 @@ STATE_DIR = ".organic-search"
 SENSITIVE_KEY = re.compile(r"(?:token|secret|password|api[_-]?key|cookie|credential)", re.I)
 IANA_TIMEZONE_SHAPE = re.compile(r"^[A-Za-z_+-]+(?:/[A-Za-z0-9_.+-]+)+$")
 POLICY_MODES = ("review_first", "autonomous_safe")
+MACHINE_READABLE_FILES = ("llms.txt", "llms-full.txt", "ai.txt")
 
 
 def utc_now() -> str:
@@ -119,6 +120,27 @@ def autonomy_defaults() -> dict:
     }
 
 
+def machine_readable_defaults() -> dict:
+    return {
+        "create_on_first_run": True,
+        "update_when_source_changes": True,
+        "required_files": list(MACHINE_READABLE_FILES),
+        "manifest_path": ".organic-search/machine-readable.json",
+        "output_directory": "detect",
+        "max_full_bytes": 1_000_000,
+        "ai_txt_status": "experimental_nonstandard",
+    }
+
+
+def valid_project_relative_path(value: object, allow_detect: bool = False) -> bool:
+    if not isinstance(value, str) or not value.strip():
+        return False
+    if allow_detect and value == "detect":
+        return True
+    candidate = Path(value)
+    return not candidate.is_absolute() and ".." not in candidate.parts
+
+
 def initial_config(args: argparse.Namespace) -> dict:
     origin = normalize_origin(args.origin)
     landing_url = validate_landing_url(origin, args.landing_url)
@@ -151,6 +173,7 @@ def initial_config(args: argparse.Namespace) -> dict:
             "enabled_after_approval": False,
             "key_location": "",
         },
+        "machine_readable": machine_readable_defaults(),
         "automation": {
             "daily_local_time": "07:00",
             "weekly_day": "Monday",
@@ -328,6 +351,27 @@ def validate_project(project: Path) -> list[str]:
         if policy.get("require_human_review_for_sensitive_topics") is not True:
             errors.append("autonomous_safe requires human review for sensitive topics")
 
+    machine = config.get("machine_readable")
+    if machine is not None:
+        if not isinstance(machine, dict):
+            errors.append("machine_readable must be an object")
+        else:
+            if machine.get("create_on_first_run") is not True:
+                errors.append("machine_readable.create_on_first_run must be true")
+            if machine.get("update_when_source_changes") is not True:
+                errors.append("machine_readable.update_when_source_changes must be true")
+            if machine.get("required_files") != list(MACHINE_READABLE_FILES):
+                errors.append("machine_readable.required_files must contain llms.txt, llms-full.txt, and ai.txt")
+            if not valid_project_relative_path(machine.get("manifest_path")):
+                errors.append("machine_readable.manifest_path must stay inside the project")
+            if not valid_project_relative_path(machine.get("output_directory"), allow_detect=True):
+                errors.append("machine_readable.output_directory must be detect or stay inside the project")
+            max_full_bytes = machine.get("max_full_bytes")
+            if not isinstance(max_full_bytes, int) or not 10_000 <= max_full_bytes <= 5_000_000:
+                errors.append("machine_readable.max_full_bytes must be between 10000 and 5000000")
+            if machine.get("ai_txt_status") != "experimental_nonstandard":
+                errors.append("machine_readable.ai_txt_status must be experimental_nonstandard")
+
     gsc_property = config.get("search_console", {}).get("property", "")
     if gsc_property and not (
         gsc_property.startswith("sc-domain:")
@@ -368,6 +412,7 @@ def cmd_status(args: argparse.Namespace) -> int:
         "recent_intelligence": config.get("automation", {}).get(
             "recent_intelligence", recent_intelligence_defaults()
         ),
+        "machine_readable": config.get("machine_readable", machine_readable_defaults()),
         "gsc_property": config["search_console"]["property"] or "unconfigured",
         "indexnow": state.get("provider_state", {}).get("indexnow", {}).get("status", "unknown"),
         "queue_size": len(state.get("queue", [])),
@@ -401,6 +446,43 @@ def cmd_set_mode(args: argparse.Namespace) -> int:
                 "status": "updated",
                 "mode": args.mode,
                 "action_budget": automation["autonomy"]["max_actions_per_daily_cycle"],
+            },
+            indent=2,
+        )
+    )
+    return 0
+
+
+def cmd_configure_machine_readable(args: argparse.Namespace) -> int:
+    project = Path(args.project).resolve()
+    paths = state_paths(project)
+    errors = validate_project(project)
+    if errors:
+        raise ValueError("project validation failed: " + "; ".join(errors))
+    if not valid_project_relative_path(args.output_directory):
+        raise ValueError("output directory must stay inside the project")
+    if not valid_project_relative_path(args.manifest_path):
+        raise ValueError("manifest path must stay inside the project")
+    if not 10_000 <= args.max_full_bytes <= 5_000_000:
+        raise ValueError("max full bytes must be between 10000 and 5000000")
+
+    config = load_json(paths["config"])
+    settings = machine_readable_defaults()
+    settings["output_directory"] = args.output_directory
+    settings["manifest_path"] = args.manifest_path
+    settings["max_full_bytes"] = args.max_full_bytes
+    config["machine_readable"] = settings
+    atomic_json_write(paths["config"], config)
+    post_errors = validate_project(project)
+    if post_errors:
+        raise ValueError("updated project validation failed: " + "; ".join(post_errors))
+    print(
+        json.dumps(
+            {
+                "status": "updated",
+                "output_directory": args.output_directory,
+                "manifest_path": args.manifest_path,
+                "required_files": list(MACHINE_READABLE_FILES),
             },
             indent=2,
         )
@@ -474,6 +556,19 @@ def build_parser() -> argparse.ArgumentParser:
     set_mode.add_argument("--project", required=True)
     set_mode.add_argument("--mode", required=True, choices=POLICY_MODES)
     set_mode.set_defaults(func=cmd_set_mode)
+
+    machine = sub.add_parser(
+        "configure-machine-readable",
+        help="configure first-run generation of llms.txt, llms-full.txt, and ai.txt",
+    )
+    machine.add_argument("--project", required=True)
+    machine.add_argument("--output-directory", required=True)
+    machine.add_argument(
+        "--manifest-path",
+        default=".organic-search/machine-readable.json",
+    )
+    machine.add_argument("--max-full-bytes", type=int, default=1_000_000)
+    machine.set_defaults(func=cmd_configure_machine_readable)
 
     record_run = sub.add_parser("record-run", help="append a run record and update current state")
     record_run.add_argument("--project", required=True)

@@ -91,3 +91,21 @@ references include:
 Re-check official guidance during the monthly practitioner review because
 search and AI discovery behavior changes. A failed or unavailable check remains
 `unverified`; it does not become evidence for or against the tip.
+
+## Compound search-asset checks
+
+A practitioner reported using the following architecture on ScrollLaunch. The
+reported outcome is not proof that the same architecture will work elsewhere.
+Apply these additional checks to the project's own product, data, audience, and
+indexation evidence.
+
+| ID | Reported strategy | Automation decision |
+| --- | --- | --- |
+| `PT-11` | Combine Search Console with a commercial SEO-data API for recurring audits. | Use GSC as the first-party baseline. Add Ahrefs or another licensed provider only when access already exists and its data changes a decision. Compare like-for-like provider windows and report unavailable data honestly. |
+| `PT-12` | Create makers, countries, categories, tags, alternatives, technology, and archive pages around each launch. | Treat each page family as a candidate template. Approve it only when every URL has distinct public data, user value, browseable hierarchy, canonical rules, lifecycle handling, and no doorway or index-bloat risk. |
+| `PT-13` | Build free tools that lead users toward the main product. | Prefer a free tool when it solves a real adjacent task, has evidenced demand, works without deceptive gating, and has a natural measured conversion path. Include security, abuse, privacy, maintenance, and operating-cost checks. |
+| `PT-14` | Build a directory or leaderboard as an independent search surface. | Require a defensible dataset, transparent inclusion and ranking method, update cadence, correction path, useful filters, stable canonical pages, and conflict disclosure. Reject pay-to-rank, fabricated metrics, copied databases, and thin combinations. |
+| `PT-15` | Publish machine-readable files and interfaces for agents. | On the first run, create and validate `llms.txt`, `llms-full.txt`, and experimental `ai.txt` from verified public canonical content. Keep them synchronized. Consider Markdown catalogs, OpenAPI, public APIs, CLI, or MCP only when they expose a real supported capability. Never claim a ranking benefit. |
+| `PT-16` | Keep a permanent page for every product or launch. | Preserve a stable canonical URL while the page remains truthful and useful. Add status, history, maker, alternatives, and related context when supported. Merge, redirect, archive, or `noindex` expired and duplicate pages according to user value instead of keeping zombie URLs forever. |
+| `PT-17` | Connect products to related entity and collection pages. | Design a crawlable contextual graph between useful parent, child, sibling, and conversion pages. Prevent orphan pages and excessive faceted combinations. Link because the relationship helps a visitor, not to circulate an abstract authority score. |
+| `PT-18` | Prefer genuinely useful pages over random generated pages. | This is a hard gate. A generated page must contain original data, functionality, analysis, or decision help that would remain useful without search traffic. Otherwise consolidate or do not publish. |

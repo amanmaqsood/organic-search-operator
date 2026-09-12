@@ -6,9 +6,10 @@ description: >
   sitemaps, notify Bing through IndexNow, audit a site or repository, improve a
   landing page, build a supporting content cluster, create an organic-search
   plan, investigate indexing, mine GSC opportunities, refresh declining pages,
-  or configure a recurring SEO automation with optional bounded autonomy and
-  recent audience intelligence. Produces reviewable changes by default and
-  never promises rankings or indexing.
+  generate llms.txt, llms-full.txt, and ai.txt, evaluate useful programmatic
+  page systems or free tools, or configure a recurring SEO automation with
+  optional bounded autonomy and recent audience intelligence. Produces
+  reviewable changes by default and never promises rankings or indexing.
 ---
 
 # Organic Search Operator
@@ -54,10 +55,11 @@ Read only the references needed for the selected route:
 - [Audit and opportunity model](references/audit-and-planning.md)
 - [Content and editorial policy](references/content-and-editorial.md)
 - [GEO and entity guidance](references/geo-and-entity.md)
+- [Machine-readable discovery set](references/machine-readable-discovery.md)
 - [Automation and state](references/automation-and-state.md)
 - [Automation prompt template](references/automation-prompt-template.md)
 - [Recent intelligence and autonomous action](references/recent-intelligence.md)
-- [Practitioner intelligence and PT-01 through PT-10 decision checks](references/practitioner-intelligence.md)
+- [Practitioner intelligence and PT-01 through PT-18 decision checks](references/practitioner-intelligence.md)
 - [Report contract](references/report-contract.md)
 
 ## Bootstrap
@@ -80,6 +82,10 @@ Read only the references needed for the selected route:
 4. Validate the result with `seo_operator.py validate --project <repo>`.
 5. Record detected commands and adapters in `.organic-search/config.json`.
    Store no secrets there.
+6. On the first automation run, detect the public source directory, build the
+   verified public-content manifest, and follow
+   [Machine-readable discovery set](references/machine-readable-discovery.md)
+   to generate `llms.txt`, `llms-full.txt`, and experimental `ai.txt`.
 
 ## Provider setup
 
@@ -117,7 +123,7 @@ Collect evidence in this order:
    practitioner-experiment evidence.
 8. a current Last 30 Days brief for scheduled cycles, treated as supporting
    evidence rather than proof of demand.
-9. practitioner-derived PT-01 through PT-10 checks, with unsupported numeric and
+9. practitioner-derived PT-01 through PT-18 checks, with unsupported numeric and
    causal claims rejected rather than converted into quotas.
 
 Produce a ranked queue. Prefer, in order:
@@ -165,12 +171,16 @@ For every scheduled cycle, follow
 Apply the decision checks in
 [Practitioner intelligence](references/practitioner-intelligence.md) when
 building and selecting from the queue.
+On the first scheduled run and after relevant canonical content changes, follow
+[Machine-readable discovery set](references/machine-readable-discovery.md).
 
 - Default rhythm: quiet daily monitor at 07:00 project-local time, weekly action
   plan and drafting batch, monthly full audit and baseline refresh.
 - Stay silent when daily state is unchanged and no action is required.
 - Every cycle must consult a Last 30 Days brief that is no more than 24 hours
   old. Reuse the same-day brief instead of repeating paid or slow source calls.
+- The first run creates all three machine-readable discovery files. Later runs
+  update them only when their verified canonical source changes.
 - Daily work in `review_first` may inspect, measure, prioritize, draft, test,
   and prepare a review. In `autonomous_safe`, it may complete one eligible,
   reversible action without per-run approval.
@@ -189,6 +199,8 @@ Before reporting success, verify:
 
 - configuration and state validate;
 - claims and citations survive the prose pass;
+- `llms.txt`, `llms-full.txt`, and `ai.txt` match the current public manifest,
+  contain no excluded content, and are live-verified after deployment;
 - no intent collision or orphan page was introduced;
 - touched canonical URLs resolve as expected and are indexable by policy;
 - build and relevant tests pass;

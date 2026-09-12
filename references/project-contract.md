@@ -8,6 +8,9 @@ Use `.organic-search/` as the portable project state directory.
 - `state.json`: current baselines, content queue, provider state, and latest run.
 - `runs.jsonl`: append-only run records.
 - `experiments.jsonl`: append-only practitioner and project experiments.
+- `machine-readable.json`: reviewed public canonical content manifest used to
+  generate the three origin-root discovery files.
+- `machine-readable-state.json`: generator ownership and content hashes.
 - `cache/`: replaceable provider responses. Do not commit by default.
 
 Never store access tokens, cookies, OAuth client secrets, Bing API keys, or DNS
@@ -28,6 +31,8 @@ credentials in these files.
 - GSC property when confirmed
 - sitemap URL when confirmed
 - IndexNow key location when deployed
+- first-run machine-readable generation policy, manifest path, detected public
+  source directory, size limit, and experimental `ai.txt` status
 - recent intelligence provider, 24-hour freshness rule, and failure behavior
 - policy mode and one-action autonomous budget
 
@@ -60,3 +65,5 @@ reopen rejected topics or reuse a published intent for a new URL.
 - Do not resubmit unchanged sitemaps on every run.
 - Notify IndexNow only for canonical URLs changed since the last successful
   notification.
+- Regenerate machine-readable files only when their normalized public source
+  manifest changes. Refuse to overwrite an unmanaged or manually diverged file.

@@ -48,6 +48,28 @@ Industry, budget, role, and use-case pages must address materially different
 buyer needs with distinct proof and examples. If the answer would mostly repeat
 another page, add a section to that page instead.
 
+For entity and collection systems such as products, makers, countries,
+categories, tags, technologies, alternatives, and date archives, approve the
+template only after reviewing representative sparse, average, and rich records.
+Each indexable URL needs original data, functionality, analysis, or decision
+help. Control empty combinations, duplicate facets, pagination, canonicalization,
+and expired records explicitly.
+
+Permanent product pages need a lifecycle, not merely an unchanging URL. Keep
+availability, maker, dates, product status, relationships, and corrections
+current. Merge, redirect, archive, or `noindex` pages that become duplicate,
+misleading, empty, or no longer useful.
+
+Free tools must perform their advertised task and connect naturally to the
+primary landing page. Document data handling, rate limits, abuse controls,
+failure behavior, maintenance ownership, operating cost, and the conversion
+event before treating a tool as an SEO opportunity.
+
+Directories and leaderboards need a legitimate dataset, transparent inclusion
+and ranking methods, visible update dates, correction mechanisms, useful
+filters, and conflicts disclosure. Do not sell undisclosed ranking position,
+copy a protected database, or generate empty location and category crossings.
+
 Reddit-intent pages are controlled experiments. Check GSC and the current SERP
 first. Prefer adding a useful section to an existing page. Do not copy posts or
 comments, imply Reddit affiliation, or treat community anecdotes as authority

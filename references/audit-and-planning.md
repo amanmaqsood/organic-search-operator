@@ -61,6 +61,17 @@ each applicable check, retain the project evidence, competing explanation,
 expected metric, review date, and stop condition. Do not add points merely
 because a tip is popular or came from a recognized practitioner.
 
+Also apply `PT-11` through `PT-18` when the project has product records,
+structured entities, free-tool potential, directory data, or agent-facing
+interfaces. Audit prospective page families as systems: sample generated URLs,
+measure uniqueness and indexation, inspect filter combinations and lifecycle
+states, and verify that the pages form a useful browseable hierarchy.
+
+Use Search Console as the first-party search baseline. A licensed Ahrefs API or
+equivalent provider may add keyword, competitor, and link evidence when already
+configured, but it is optional and must not replace GSC or conversion data.
+Keep provider metrics separate because their databases and estimates differ.
+
 Thresholds are defaults, not universal truths. Scale them to the site's data
 volume and record any change.
 

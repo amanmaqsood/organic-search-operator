@@ -81,6 +81,28 @@ policy.
 Submit a sitemap only after approval and only if it is new or materially
 changed. Submission does not guarantee crawling or indexing.
 
+## Optional Ahrefs or commercial SEO-data API
+
+Use a commercial provider only when the project already has licensed access or
+the user explicitly chooses it. Keep credentials in the host secret store or
+environment, never in repository configuration, cached reports, commits, or
+tool output.
+
+For a weekly audit, request only the endpoints and rows needed to compare
+organic keywords, estimated traffic, competing pages, referring domains, and
+lost or gained links. Cache the provider response with its retrieval time,
+database, market, mode, and units. Respect row and credit limits.
+
+Keep these metrics separate from Search Console. Ahrefs-style keyword and
+traffic values are third-party estimates; GSC reports the site's Google Search
+performance. Do not sum, average, or present the two as one dataset. Use the
+commercial data to discover or corroborate an opportunity, then measure the
+site's outcome with GSC and conversion evidence.
+
+The weekly audit must continue with GSC, repository, and live-site evidence when
+the optional provider is unavailable, rate-limited, or out of credits. Record
+the exact provider state instead of substituting zero.
+
 ## Bing and IndexNow
 
 Prefer IndexNow for canonical URLs added, changed, or deleted after a verified

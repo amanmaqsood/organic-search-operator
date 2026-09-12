@@ -19,6 +19,8 @@ Report:
 - experiments and backlink/entity audit state;
 - applicable practitioner check IDs, verification state, and any rejected
   unsupported constants or causal claims;
+- machine-readable manifest and output hashes, changed or conflicting files,
+  and live state for `llms.txt`, `llms-full.txt`, and `ai.txt`;
 - files changed, review artifact, commit, and deployment state when applicable;
 - policy mode, authorization source, action budget, and rollback state;
 - quota problems, approvals needed, and next queue.

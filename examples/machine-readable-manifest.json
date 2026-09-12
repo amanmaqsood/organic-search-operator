@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "site": {
+    "name": "Example Brand",
+    "origin": "https://www.example.com",
+    "summary": "Example Brand helps small teams plan and complete project work.",
+    "last_updated": "2026-09-12",
+    "robots_url": "https://www.example.com/robots.txt",
+    "sitemap_url": "https://www.example.com/sitemap.xml",
+    "contact_url": "https://www.example.com/contact",
+    "terms_url": "https://www.example.com/terms",
+    "privacy_url": "https://www.example.com/privacy"
+  },
+  "sections": [
+    {
+      "name": "Primary pages",
+      "pages": [
+        {
+          "title": "Example Brand product",
+          "url": "https://www.example.com/product",
+          "description": "Product capabilities, audience, limitations, and conversion path.",
+          "content": "Example Brand helps small teams organize project work. The canonical product page contains the current capabilities, limitations, and signup path.",
+          "public": true,
+          "canonical": true,
+          "indexable": true
+        }
+      ]
+    }
+  ]
+}

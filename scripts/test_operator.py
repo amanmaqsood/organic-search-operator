@@ -14,6 +14,7 @@ from pathlib import Path
 import gsc_api
 import indexnow
 import live_site_audit
+import machine_readable
 import seo_operator
 
 
@@ -43,6 +44,10 @@ class BootstrapTests(unittest.TestCase):
             self.assertEqual(config["automation"]["max_drafts_per_weekly_cycle"], 2)
             self.assertEqual(config["automation"]["recent_intelligence"]["provider"], "last30days")
             self.assertEqual(config["automation"]["autonomy"]["max_actions_per_daily_cycle"], 1)
+            self.assertEqual(
+                config["machine_readable"]["required_files"],
+                ["llms.txt", "llms-full.txt", "ai.txt"],
+            )
 
     def test_init_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -101,6 +106,118 @@ class BootstrapTests(unittest.TestCase):
             path.write_text(json.dumps(config), encoding="utf-8")
             errors = seo_operator.validate_project(Path(directory))
             self.assertIn("automation.recent_intelligence.max_age_hours must be 24", errors)
+
+    def test_machine_readable_output_cannot_escape_project(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+            path = Path(directory) / ".organic-search" / "config.json"
+            config = json.loads(path.read_text())
+            config["machine_readable"]["output_directory"] = "../outside"
+            path.write_text(json.dumps(config), encoding="utf-8")
+            errors = seo_operator.validate_project(Path(directory))
+            self.assertIn("machine_readable.output_directory must be detect or stay inside the project", errors)
+
+    def test_configure_machine_readable_resolves_output_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+                result = seo_operator.cmd_configure_machine_readable(
+                    argparse.Namespace(
+                        project=directory,
+                        output_directory="public",
+                        manifest_path=".organic-search/machine-readable.json",
+                        max_full_bytes=1_000_000,
+                    )
+                )
+            self.assertEqual(result, 0)
+            config = json.loads(
+                (Path(directory) / ".organic-search" / "config.json").read_text()
+            )
+            self.assertEqual(config["machine_readable"]["output_directory"], "public")
+            self.assertEqual(seo_operator.validate_project(Path(directory)), [])
+
+
+class MachineReadableTests(unittest.TestCase):
+    def manifest(self) -> dict:
+        return {
+            "schema_version": 1,
+            "site": {
+                "name": "Example",
+                "origin": "https://example.com",
+                "summary": "A useful example product.",
+                "last_updated": "2026-09-12",
+                "robots_url": "https://example.com/robots.txt",
+                "sitemap_url": "https://example.com/sitemap.xml",
+            },
+            "sections": [
+                {
+                    "name": "Primary pages",
+                    "pages": [
+                        {
+                            "title": "Example product",
+                            "url": "https://example.com/product",
+                            "description": "Product details and pricing.",
+                            "content": "Example helps teams complete useful work.",
+                            "public": True,
+                            "canonical": True,
+                            "indexable": True,
+                        }
+                    ],
+                }
+            ],
+        }
+
+    def configured_project(self, directory: str) -> Path:
+        project = Path(directory)
+        state_dir = project / ".organic-search"
+        state_dir.mkdir()
+        (state_dir / "config.json").write_text(
+            json.dumps(
+                {
+                    "machine_readable": {
+                        "manifest_path": ".organic-search/machine-readable.json",
+                        "output_directory": "public",
+                        "max_full_bytes": 1_000_000,
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+        (state_dir / "machine-readable.json").write_text(
+            json.dumps(self.manifest()), encoding="utf-8"
+        )
+        return project
+
+    def test_renders_all_three_files(self) -> None:
+        outputs = machine_readable.render_outputs(self.manifest())
+        self.assertEqual(set(outputs), {"llms.txt", "llms-full.txt", "ai.txt"})
+        self.assertIn("https://example.com/product", outputs["llms.txt"])
+        self.assertIn("Example helps teams", outputs["llms-full.txt"])
+        self.assertIn("not a universal standard", outputs["ai.txt"])
+
+    def test_rejects_non_public_or_cross_origin_pages(self) -> None:
+        manifest = self.manifest()
+        page = manifest["sections"][0]["pages"][0]
+        page["public"] = False
+        with self.assertRaisesRegex(ValueError, "public must be true"):
+            machine_readable.render_outputs(manifest)
+        page["public"] = True
+        page["url"] = "https://other.example/product"
+        with self.assertRaisesRegex(ValueError, "site.origin"):
+            machine_readable.render_outputs(manifest)
+
+    def test_apply_is_idempotent_and_protects_manual_edits(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = self.configured_project(directory)
+            first = machine_readable.execute(project, apply=True)
+            self.assertEqual(set(first["changed"]), {"llms.txt", "llms-full.txt", "ai.txt"})
+            second = machine_readable.execute(project, apply=True)
+            self.assertEqual(second["changed"], [])
+
+            (project / "public" / "ai.txt").write_text("manual edit\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "outside the generator"):
+                machine_readable.execute(project, apply=True)
 
 
 class ProviderHelperTests(unittest.TestCase):

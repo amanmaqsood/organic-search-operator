@@ -49,6 +49,18 @@ _Avoid_: Full access, unrestricted autonomy
 The maximum number of independently deployable work items an automation may complete in one cycle.
 _Avoid_: Publishing quota, content target
 
+**Machine-readable discovery set**:
+The coordinated `llms.txt`, `llms-full.txt`, and experimental `ai.txt` files generated from verified public canonical content for compatible agents.
+_Avoid_: AI sitemap, ranking file, guaranteed citation feed
+
+**Discovery manifest**:
+The reviewed source record that identifies which public, canonical, indexable pages and facts may appear in the machine-readable discovery set.
+_Avoid_: Site scrape, private content dump
+
+**Generated-file ownership**:
+The recorded source and output hashes that let automation update its own files while refusing to overwrite unmanaged or manually diverged content.
+_Avoid_: Force overwrite, generated-file authority
+
 **Review-first**:
 The operating mode in which the skill may prepare and verify changes but needs approval before publishing or external mutations.
 _Avoid_: Fully autonomous, advisory-only

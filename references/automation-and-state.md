@@ -12,6 +12,21 @@ project-local calendar day and reuse that brief for later cycles on the same day
 Projects may override the schedule. Prefer calendar schedules over an interval
 that drifts from the intended local time.
 
+## First scheduled run
+
+Complete the normal provider and repository preflight, then establish the
+[machine-readable discovery set](machine-readable-discovery.md). Detect the
+framework's public source directory, build a manifest from verified public,
+canonical, indexable content, and generate `llms.txt`, `llms-full.txt`, and
+experimental `ai.txt`. Treat the coordinated set as one work item. In
+`review_first`, leave it as a validated review change. In `autonomous_safe`, it
+may be deployed only when every ordinary mutation and rollback gate passes.
+
+If any target already exists and differs, do not overwrite it. Inspect its
+ownership and reconcile the content in review. A missing source summary,
+unresolved canonical state, private content risk, or unknown public output
+directory blocks generation rather than allowing placeholders.
+
 ## Daily run
 
 1. Read repository instructions, project config, state, last run, queue, and
@@ -25,20 +40,25 @@ that drifts from the intended local time.
 5. Check deployment health, primary landing page, sitemap, robots, priority
    index states, rank 5 to 20 opportunities, high-impression weak-CTR pages, and
    material declines.
-6. Apply the `PT-01` through `PT-10` practitioner-derived checks. Look for
+6. Check the machine-readable manifest and generated files. Regenerate only
+   when included canonical content or relevant policy changed. Verify all three
+   live after an authorized deployment.
+7. Apply the `PT-01` through `PT-18` practitioner-derived checks. Look for
    unsupported vague claims, useful refreshes, missing contextual links,
    specific buyer questions, qualified non-branded growth, early-answer clarity,
-   defensible comparisons, and genuinely distinct buyer situations. Treat every
-   observation as a hypothesis until project evidence supports it.
-7. Re-rank the queue using qualified impact, project evidence, recent
+   defensible comparisons, genuinely distinct buyer situations, useful page
+   families, free tools, directories, durable product pages, and real
+   agent-facing capabilities. Treat every observation as a hypothesis until
+   project evidence supports it.
+8. Re-rank the queue using qualified impact, project evidence, recent
    intelligence, landing-page support, confidence, reversibility, and risk.
-8. Apply the configured policy. In `review_first`, prepare the appropriate
+9. Apply the configured policy. In `review_first`, prepare the appropriate
    review artifact. In `autonomous_safe`, select and complete at most one
    eligible work item, including at most one new page.
-9. Run validations and, when authorized, deploy and verify the focused change.
+10. Run validations and, when authorized, deploy and verify the focused change.
    Roll it back when deployment or live verification fails.
-10. Append the run record atomically and update current state.
-11. Notify only for a meaningful change, completed review artifact or
+11. Append the run record atomically and update current state.
+12. Notify only for a meaningful change, completed review artifact or
     autonomous action, failure, quota problem, rollback, or required user action.
 
 ## External actions
@@ -72,6 +92,8 @@ Include:
 - run ID, kind, start/end time, evidence dates, and commit base;
 - provider availability and quotas;
 - recent intelligence topic, retrieval time, age, coverage, and artifact;
+- machine-readable manifest source hash, generated-file hashes, conflict state,
+  changed files, and live verification;
 - GSC setup and property state;
 - opportunities added, changed, rejected, or blocked;
 - opportunity score components and authorization source;

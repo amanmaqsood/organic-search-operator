@@ -48,6 +48,12 @@ the results get worse.
 - Applies ten practitioner-derived decision checks for claim specificity,
   comparisons, refreshes, internal links, buyer questions, non-branded growth,
   early answers, buyer guides, situation pages, and responsible consistency.
+- Applies eight additional checks for weekly GSC plus optional Ahrefs evidence,
+  useful programmatic page families, free tools, directories, durable product
+  pages, internal graphs, and agent-facing product capabilities.
+- Generates `llms.txt`, `llms-full.txt`, and experimental `ai.txt` from verified
+  public canonical content on the first automation run, then keeps
+  generator-owned files synchronized when that source changes.
 - Consults the separately installed Last 30 Days skill during every scheduled
   cycle and refreshes its research at least once per project-local day.
 - Offers opt-in `autonomous_safe` operation with a one-action budget, green
@@ -392,6 +398,13 @@ worth nine times more, demand 20 to 30 links, enforce a word-count rule, or
 publish just to look active. See
 [Practitioner intelligence](references/practitioner-intelligence.md).
 
+Checks `PT-11` through `PT-18` evaluate compound search assets. They can propose
+free tools, directories, leaderboards, product and entity page families,
+durable product pages, deeper internal relationships, and real APIs or agent
+interfaces. None is automatic merely because a database can generate it. Every
+indexable page still needs distinct data, functionality, analysis, or decision
+value.
+
 In `review_first`, the automation inspects, prioritizes, drafts, tests, and
 prepares a review. In `autonomous_safe`, it may complete one reversible action,
 including at most one new page, without asking the founder during that run.
@@ -406,6 +419,48 @@ permissions, new external properties, first sitemap submission, destructive
 redirects or removals, migrations, sensitive claims, outreach, backlinks,
 directories, purchases, reviews, or endorsements.
 
+## Machine-readable discovery files
+
+The first scheduled run creates all three origin-root files:
+
+| File | Role |
+| --- | --- |
+| `llms.txt` | Concise CommonMark map of selected authoritative pages |
+| `llms-full.txt` | Extended Markdown copy of the selected public canonical content |
+| `ai.txt` | Experimental publisher-authored context, accuracy, and permissions notice |
+
+Google says these files do not help or hurt Google Search rankings. They are
+provided for compatible tools and direct agent use, while normal crawlability,
+canonical HTML, `robots.txt`, sitemaps, Search Console, and useful content remain
+the search foundation.
+
+The files are generated from `.organic-search/machine-readable.json`. Only
+public, canonical, indexable content may enter the manifest. The generator
+records hashes and refuses to overwrite existing unmanaged files or a generated
+file changed by a person.
+
+Configure the framework's public source directory:
+
+```bash
+python3 scripts/seo_operator.py configure-machine-readable \
+  --project /absolute/path/to/site \
+  --output-directory public
+```
+
+Copy and adapt
+[`examples/machine-readable-manifest.json`](examples/machine-readable-manifest.json),
+then preview, generate, and check:
+
+```bash
+python3 scripts/machine_readable.py generate --project /absolute/path/to/site
+python3 scripts/machine_readable.py generate --project /absolute/path/to/site --apply
+python3 scripts/machine_readable.py check --project /absolute/path/to/site
+```
+
+Later runs rewrite only files whose verified source output changed. See
+[Machine-readable discovery set](references/machine-readable-discovery.md) for
+inclusion, ownership, conflict, size, deployment, and live-verification rules.
+
 ## Safety model
 
 - Review-first by default; bounded autonomy is explicit per project.
@@ -418,6 +473,8 @@ directories, purchases, reviews, or endorsements.
 - No fixed publishing quota.
 - No magic numeric thresholds copied from practitioner posts without project
   validation.
+- Machine-readable files are never described as ranking signals or replacements
+  for canonical HTML and crawler controls.
 - Sensitive medical, financial, legal, safety, pregnancy, childcare, and similar
   topics require stronger sources and human review.
 - Practitioner posts enter an experiment ledger. They are not treated as facts.

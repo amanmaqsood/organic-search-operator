@@ -4,6 +4,20 @@ All notable changes follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-12
+
+- Added first-run generation and change-aware maintenance for `llms.txt`,
+  `llms-full.txt`, and experimental `ai.txt`.
+- Added a dependency-free generator with dry-run, apply, validation,
+  source-hash, idempotency, size-limit, and manual-edit protection.
+- Added project configuration and an example public-content manifest for the
+  three-file discovery set.
+- Added `PT-11` through `PT-18` checks for GSC plus optional Ahrefs evidence,
+  programmatic page families, free tools, directories and leaderboards,
+  permanent product-page lifecycle, internal graphs, and genuine utility.
+- Documented that machine-readable files are not Google ranking signals and
+  that `ai.txt` remains experimental and non-standard.
+
 ## [1.2.0] - 2026-09-12
 
 - Added `PT-01` through `PT-10` practitioner-derived decision checks to every
@@ -38,7 +52,8 @@ All notable changes follow [Semantic Versioning](https://semver.org/).
 - Added practitioner experiment intake and `prose-humanizer` integration.
 - Added Codex, Claude Code, and manual installation guidance.
 
-[Unreleased]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/amanmaqsood/organic-search-operator/releases/tag/v1.0.0

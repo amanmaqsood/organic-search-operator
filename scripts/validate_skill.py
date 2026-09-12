@@ -18,6 +18,9 @@ REQUIRED_FILES = (
     "NOTICE.md",
     "CONTEXT.md",
     "agents/openai.yaml",
+    "scripts/machine_readable.py",
+    "references/machine-readable-discovery.md",
+    "examples/machine-readable-manifest.json",
 )
 PRIVATE_PATTERNS = (
     re.compile(r"[A-Za-z]:\\Users\\[^\\\s]+", re.I),

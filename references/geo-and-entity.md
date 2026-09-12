@@ -30,6 +30,10 @@ not a submission protocol and cannot guarantee a mention or citation.
 - Add transcripts or textual summaries for useful original video and audio.
 - Preserve original data, methods, examples, and limitations that make the page
   worth citing.
+- Create and maintain the
+  [machine-readable discovery set](machine-readable-discovery.md) from the same
+  verified canonical content. Treat it as optional-consumer accessibility, not
+  a Google ranking factor or a substitute for crawler access.
 
 ## Measurement
 
