@@ -63,6 +63,26 @@ A coherent reader-useful section with enough subject, context, evidence, and
 qualification to remain understandable when a search system surfaces it.
 _Avoid_: Token chunk, snippet farm
 
+**Technical quality gate**:
+A context-aware classification of live and source findings as blocking, required review, conditional, measured, migration-sensitive, or advisory.
+_Avoid_: SEO score, universal checklist
+
+**Distribution campaign**:
+A bounded effort to place a product before a relevant external audience and measure qualified outcomes.
+_Avoid_: Backlink blast, directory spam
+
+**Listing packet**:
+A reviewed source of truth for one platform's identity, destination, claims, copy, assets, rules, confirmation state, and measurement plan.
+_Avoid_: Submission bot payload, spun description
+
+**Submission checkpoint**:
+The moment immediately before account creation or a public external action when the exact identity, content, destination, cost, and action require user confirmation.
+_Avoid_: Blanket consent, silent submit
+
+**Browser adapter**:
+The host browser, dedicated Playwright profile, user-started CDP session, or manual handoff used to prepare a listing form.
+_Avoid_: Scraper, default personal profile
+
 **Discovery manifest**:
 The reviewed source record that identifies which public, canonical, indexable pages and facts may appear in the machine-readable discovery set.
 _Avoid_: Site scrape, private content dump

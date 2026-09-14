@@ -1,5 +1,8 @@
 # Audit and opportunity model
 
+Apply [Technical quality gate](technical-quality-gate.md) to the repository and
+live-site evidence before scoring content or distribution work.
+
 ## Evidence clock
 
 Record the retrieval time, provider's final complete date, comparison window,

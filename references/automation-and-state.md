@@ -43,6 +43,8 @@ directory blocks generation rather than allowing placeholders.
 5. Check deployment health, primary landing page, sitemap, robots, priority
    index states, rank 5 to 20 opportunities, high-impression weak-CTR pages, and
    material declines.
+   Apply the [technical quality gate](technical-quality-gate.md); keep static,
+   rendered, field-performance, and provider evidence distinct.
 6. Follow [AI-assisted search visibility](ai-visibility.md). Collect available
    provider observations and eligibility state, but normally defer AI-specific
    content selection to the weekly cycle and complete comparison window.
@@ -67,6 +69,12 @@ directory blocks generation rather than allowing placeholders.
 13. Notify only for a meaningful change, completed review artifact or
     autonomous action, failure, quota problem, rollback, or required user action.
 
+A scheduled run may revalidate a distribution platform, inspect an existing
+live listing, or prepare a listing packet. It must not select a browser identity,
+create an account, solve an access challenge, buy placement, send a message, or
+make a public submission. Route interactive campaigns through
+[Audience-first distribution and listings](distribution-and-listings.md).
+
 ## External actions
 
 The automation may always read already authorized provider data. In
@@ -81,7 +89,9 @@ Always require approval for:
 - DNS changes;
 - new external properties or permissions;
 - sitemap first submission;
-- new directory, profile, outreach, or backlink submissions;
+- owner-selected browser identity, account creation, and every new directory,
+  profile, community, outreach, backlink, or launch submission at the moment of
+  the external action;
 - destructive URL removal, redirect, domain, or URL migration changes;
 - purchases, billing, credentials, ownership, or account changes.
 
@@ -107,10 +117,15 @@ Include:
 - opportunity score components and authorization source;
 - pages drafted, refreshed, approved, published, and verified;
 - metadata, links, schema, sitemap, and CTA changes;
+- technical-quality severity, scope, static/rendered limitations, Core Web
+  Vitals evidence kind, and migration-sensitive findings;
 - build and validation results;
 - Google sitemap and inspection outcomes;
 - IndexNow and optional Bing outcomes;
 - experiment updates;
+- distribution platform, fit, rule-check date, identity state, packet,
+  confirmation checkpoints, submission/moderation state, live URL, and
+  qualified outcome;
 - applicable practitioner check IDs, verification state, and rejected numeric
   or causal claims;
 - autonomous action count, new-page count, commit, deployment, live
@@ -126,5 +141,7 @@ Default to audit-only. Check known profiles, earned mentions, submitted entries,
 platform messages, and provider backlink data. New opportunity discovery is
 opt-in and limited to legitimate product profiles, relevant directories,
 partner/resource pages, and earned media. Every candidate needs a relevance and
-risk rationale. Submission or outreach always requires approval and is never in
-the autonomous-safe mutation envelope.
+risk rationale. Treat links as incidental to audience distribution. Submission
+or outreach always requires action-time approval and is never in the
+autonomous-safe mutation envelope. Reject paid-link packages, networks,
+reciprocal ranking badges, fabricated reviews, and vote solicitation.

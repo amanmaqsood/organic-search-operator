@@ -155,6 +155,14 @@ enables discovery. Do not submit profiles, contact people, or create external
 listings without approval. Reject link farms, paid-link schemes, fabricated
 endorsements, fake reviews, and reciprocal manipulation.
 
+For distribution opportunities, follow distribution-and-listings.md. A cycle
+may revalidate platform rules, score audience fit, inspect a destination page,
+and prepare or update a fact-checked listing packet. It must not choose an
+identity from a signed-in browser, create an account, solve an access challenge,
+buy placement, add a reciprocal badge, send a message, solicit votes, or make a
+public submission unattended. Account creation and final submission each need
+action-time confirmation in an interactive run.
+
 Run the project build and relevant validations for every proposed change. Check
 canonical uniqueness, indexability policy, sitemap membership, internal links,
 metadata, schema eligibility, media, and live routes as applicable. Prepare a

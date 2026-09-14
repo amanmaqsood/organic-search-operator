@@ -117,6 +117,8 @@ Never autonomous:
   factual claims;
 - outreach, profile creation, directory submission, backlink acquisition,
   purchases, paid links, reviews, endorsements, or messages to people;
+- account creation, browser identity selection, vote solicitation, reciprocal
+  listing badges, or public launch/community submissions;
 - more than one independently deployable action or one new page in a daily run.
 
 If the highest-scoring item is outside the envelope, leave it queued and choose

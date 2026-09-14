@@ -42,6 +42,17 @@
     "chatgpt_referrals": "auto_if_available",
     "sampled_prompts": "observational"
   },
+  "distribution": {
+    "enabled_after_approval": false,
+    "goal": "qualified_audience",
+    "browser_adapter": "auto",
+    "identity_state": "unconfigured",
+    "max_platforms_per_campaign": 5,
+    "allow_paid": false,
+    "allow_reciprocal_links": false,
+    "require_account_creation_confirmation": true,
+    "require_public_submission_confirmation": true
+  },
   "automation": {
     "daily_local_time": "07:00",
     "weekly_day": "Monday",

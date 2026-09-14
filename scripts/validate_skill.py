@@ -20,7 +20,10 @@ REQUIRED_FILES = (
     "agents/openai.yaml",
     "scripts/machine_readable.py",
     "references/machine-readable-discovery.md",
+    "references/technical-quality-gate.md",
+    "references/distribution-and-listings.md",
     "examples/machine-readable-manifest.json",
+    "examples/listing-packet.json",
 )
 PRIVATE_PATTERNS = (
     re.compile(r"[A-Za-z]:\\Users\\[^\\\s]+", re.I),

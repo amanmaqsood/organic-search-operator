@@ -35,8 +35,15 @@ credentials in these files.
   source directory, size limit, and experimental `ai.txt` status
 - AI-visibility daily monitoring, weekly decision cadence, comparison window,
   and provider availability policy
+- audience-first distribution policy, browser adapter, owner-selected identity
+  state, campaign batch limit, and action-time confirmation requirements
 - recent intelligence provider, 24-hour freshness rule, and failure behavior
 - policy mode and one-action autonomous budget
+
+Distribution remains disabled until a user authorizes a campaign. Enabling it
+does not authorize account creation, payment, messages, or final submission;
+those are separate action-time checkpoints. Never store an account email,
+password, browser cookie, or session in project configuration.
 
 `scripts/seo_operator.py init` creates a conservative review-first starter. The
 user or agent must replace placeholders before provider mutations or publishing.

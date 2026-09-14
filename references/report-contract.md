@@ -16,12 +16,17 @@ Report:
 - the top ranked opportunities, especially positions 5 to 20 and comparable
   weak-CTR pages;
 - blockers fixed or still open;
+- technical-quality severity and scope, including static versus rendered
+  limitations and separate field versus lab performance evidence;
 - pages proposed, drafted, refreshed, approved, published, and live-verified;
 - metadata, internal links, CTA, schema, sitemap, and media changes;
 - build and validation results;
 - Google sitemap and URL Inspection state;
 - IndexNow and optional Bing submission state;
 - experiments and backlink/entity audit state;
+- distribution fit, rule-check date, selected identity state, listing-packet
+  state, action-time confirmations, submission/moderation state, live URL, and
+  qualified referral or conversion outcome;
 - applicable practitioner check IDs, verification state, and any rejected
   unsupported constants or causal claims;
 - machine-readable manifest and output hashes, changed or conflicting files,

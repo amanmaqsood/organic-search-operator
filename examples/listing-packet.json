@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "campaign_id": "example-brand-product-hunt-2026-09",
+  "product": {
+    "name": "Example Brand",
+    "canonical_url": "https://www.example.com/product",
+    "category": "project-defined",
+    "audience": "project-defined",
+    "pricing_or_availability": "owner-confirmed",
+    "launch_stage": "owner-confirmed"
+  },
+  "identity": {
+    "account_email_or_handle": "owner-must-select",
+    "account_owner": "owner-must-confirm",
+    "authorized_for_this_platform": false
+  },
+  "copy": {
+    "tagline": "fact-checked draft",
+    "short_description": "fact-checked draft",
+    "long_description": "fact-checked draft",
+    "founder_note": "fact-checked draft",
+    "tags": [],
+    "disclosures": []
+  },
+  "assets": {
+    "logo": "project-relative-owned-asset",
+    "screenshots": [],
+    "demo_url": "",
+    "generated_launch_card": ""
+  },
+  "platform": {
+    "name": "Product Hunt",
+    "submission_url": "https://www.producthunt.com/launch",
+    "fit_reason": "project-specific",
+    "rules_checked_at": "2026-09-14T00:00:00Z",
+    "payment_required": "recheck",
+    "reciprocal_link_required": "recheck",
+    "automation_allowed": "recheck",
+    "required_fields": []
+  },
+  "workflow": {
+    "state": "planned",
+    "account_creation_confirmed_at_action_time": false,
+    "public_submission_confirmed_at_action_time": false,
+    "submitted_at": null,
+    "moderation_state": "not_submitted",
+    "live_listing_url": ""
+  },
+  "measurement": {
+    "permitted_campaign_url": "",
+    "primary_outcome": "qualified_signup",
+    "referral_sessions": null,
+    "qualified_conversions": null,
+    "notes": ""
+  }
+}

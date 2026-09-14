@@ -144,6 +144,20 @@ def ai_visibility_defaults() -> dict:
     }
 
 
+def distribution_defaults() -> dict:
+    return {
+        "enabled_after_approval": False,
+        "goal": "qualified_audience",
+        "browser_adapter": "auto",
+        "identity_state": "unconfigured",
+        "max_platforms_per_campaign": 5,
+        "allow_paid": False,
+        "allow_reciprocal_links": False,
+        "require_account_creation_confirmation": True,
+        "require_public_submission_confirmation": True,
+    }
+
+
 def valid_project_relative_path(value: object, allow_detect: bool = False) -> bool:
     if not isinstance(value, str) or not value.strip():
         return False
@@ -187,6 +201,7 @@ def initial_config(args: argparse.Namespace) -> dict:
         },
         "machine_readable": machine_readable_defaults(),
         "ai_visibility": ai_visibility_defaults(),
+        "distribution": distribution_defaults(),
         "automation": {
             "daily_local_time": "07:00",
             "weekly_day": "Monday",
@@ -221,6 +236,7 @@ def initial_state() -> dict:
             "bing_ai_performance": {"status": "optional"},
             "chatgpt_referrals": {"status": "optional"},
             "sampled_prompts": {"status": "optional"},
+            "distribution": {"status": "disabled"},
         },
     }
 
@@ -411,6 +427,33 @@ def validate_project(project: Path) -> list[str]:
             if ai_visibility.get("sampled_prompts") != "observational":
                 errors.append("ai_visibility.sampled_prompts must be observational")
 
+    distribution = config.get("distribution")
+    if distribution is not None:
+        if not isinstance(distribution, dict):
+            errors.append("distribution must be an object")
+        else:
+            if not isinstance(distribution.get("enabled_after_approval"), bool):
+                errors.append("distribution.enabled_after_approval must be boolean")
+            if distribution.get("goal") != "qualified_audience":
+                errors.append("distribution.goal must be qualified_audience")
+            if distribution.get("browser_adapter") not in ("auto", "host", "playwright", "cdp", "manual"):
+                errors.append("distribution.browser_adapter is invalid")
+            if distribution.get("identity_state") not in ("unconfigured", "owner_selected"):
+                errors.append("distribution.identity_state must be unconfigured or owner_selected")
+            maximum = distribution.get("max_platforms_per_campaign")
+            if not isinstance(maximum, int) or not 1 <= maximum <= 10:
+                errors.append("distribution.max_platforms_per_campaign must be between 1 and 10")
+            if distribution.get("allow_reciprocal_links") is not False:
+                errors.append("distribution.allow_reciprocal_links must be false")
+            if not isinstance(distribution.get("allow_paid"), bool):
+                errors.append("distribution.allow_paid must be boolean")
+            for field in (
+                "require_account_creation_confirmation",
+                "require_public_submission_confirmation",
+            ):
+                if distribution.get(field) is not True:
+                    errors.append(f"distribution.{field} must be true")
+
     gsc_property = config.get("search_console", {}).get("property", "")
     if gsc_property and not (
         gsc_property.startswith("sc-domain:")
@@ -453,6 +496,7 @@ def cmd_status(args: argparse.Namespace) -> int:
         ),
         "machine_readable": config.get("machine_readable", machine_readable_defaults()),
         "ai_visibility": config.get("ai_visibility", ai_visibility_defaults()),
+        "distribution": config.get("distribution", distribution_defaults()),
         "gsc_property": config["search_console"]["property"] or "unconfigured",
         "indexnow": state.get("provider_state", {}).get("indexnow", {}).get("status", "unknown"),
         "queue_size": len(state.get("queue", [])),

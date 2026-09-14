@@ -52,6 +52,10 @@ class BootstrapTests(unittest.TestCase):
             self.assertEqual(config["ai_visibility"]["decision_cadence"], "weekly")
             self.assertEqual(config["ai_visibility"]["comparison_window_days"], 28)
             self.assertEqual(config["ai_visibility"]["sampled_prompts"], "observational")
+            self.assertEqual(config["distribution"]["goal"], "qualified_audience")
+            self.assertEqual(config["distribution"]["identity_state"], "unconfigured")
+            self.assertFalse(config["distribution"]["allow_reciprocal_links"])
+            self.assertTrue(config["distribution"]["require_public_submission_confirmation"])
 
     def test_init_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -150,6 +154,33 @@ class BootstrapTests(unittest.TestCase):
             self.assertEqual(result, 0)
             status = json.loads(output.getvalue())
             self.assertEqual(status["ai_visibility"], seo_operator.ai_visibility_defaults())
+
+    def test_pre_v1_5_config_uses_distribution_defaults(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+            root = Path(directory) / ".organic-search"
+            config = json.loads((root / "config.json").read_text())
+            del config["distribution"]
+            (root / "config.json").write_text(json.dumps(config), encoding="utf-8")
+            self.assertEqual(seo_operator.validate_project(Path(directory)), [])
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output):
+                result = seo_operator.cmd_status(argparse.Namespace(project=directory))
+            self.assertEqual(result, 0)
+            status = json.loads(output.getvalue())
+            self.assertEqual(status["distribution"], seo_operator.distribution_defaults())
+
+    def test_distribution_rejects_reciprocal_links(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+            path = Path(directory) / ".organic-search" / "config.json"
+            config = json.loads(path.read_text())
+            config["distribution"]["allow_reciprocal_links"] = True
+            path.write_text(json.dumps(config), encoding="utf-8")
+            errors = seo_operator.validate_project(Path(directory))
+            self.assertIn("distribution.allow_reciprocal_links must be false", errors)
 
     def test_configure_machine_readable_resolves_output_directory(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -278,12 +309,25 @@ class AuditParserTests(unittest.TestCase):
         parser.feed(
             '<html><head><title>Example</title><meta name="description" content="Useful page">'
             '<link rel="canonical" href="https://example.com/a"><meta property="og:image" content="/a.png">'
-            '</head><body><h1>Example</h1><a href="/b">Next</a></body></html>'
+            '<meta name="viewport" content="width=device-width"><script type="application/ld+json">'
+            '{"@type":"SoftwareApplication"}</script></head><body><h1>Example</h1>'
+            '<h3>Skipped</h3><img src="/shot.png"><a href="/b">Next</a></body></html>'
         )
         self.assertEqual(parser.title, "Example")
         self.assertEqual(parser.h1_count, 1)
         self.assertEqual(parser.canonical, "https://example.com/a")
         self.assertEqual(parser.links, ["/b"])
+        self.assertEqual(parser.headings[1]["level"], 3)
+        self.assertFalse(parser.images[0]["alt_present"])
+        self.assertEqual(parser.viewport, "width=device-width")
+        self.assertEqual(live_site_audit.schema_types(json.loads(parser.json_ld_blocks[0])), ["SoftwareApplication"])
+        self.assertTrue(live_site_audit.heading_has_jump(parser.headings))
+
+    def test_issue_severity_and_slug_review(self) -> None:
+        self.assertEqual(live_site_audit.issue_severity("noindex_in_sitemap"), "blocking")
+        self.assertEqual(live_site_audit.issue_severity("multiple_h1"), "advisory")
+        self.assertTrue(live_site_audit.slug_needs_review("https://example.com/Bad_slug"))
+        self.assertFalse(live_site_audit.slug_needs_review("https://example.com/good-slug"))
 
     def test_sitemap_parser(self) -> None:
         kind, urls = live_site_audit.xml_locations(

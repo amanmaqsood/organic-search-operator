@@ -29,6 +29,24 @@
     "chatgpt_referrals": {"status": "unavailable"},
     "sampled_prompts": {"status": "not_run"}
   },
+  "technical_quality": {
+    "scope": "sampled_static_plus_bounded_links",
+    "blocking_findings": 0,
+    "required_review_findings": 0,
+    "rendered_mobile_check": "not_run",
+    "core_web_vitals_field": "unavailable",
+    "lighthouse_lab": "not_run"
+  },
+  "distribution": {
+    "state": "not_requested",
+    "platform": null,
+    "rules_checked_at": null,
+    "identity_state": "unconfigured",
+    "account_creation_confirmation": "not_applicable",
+    "public_submission_confirmation": "not_applicable",
+    "moderation_state": "not_submitted",
+    "live_listing_url": null
+  },
   "changes": [],
   "approvals_needed": [],
   "blockers": [],

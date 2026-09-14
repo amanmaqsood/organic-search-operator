@@ -7,7 +7,9 @@ An evidence-led SEO and GEO agent skill for Codex, Claude Code, and other
 Agent Skills-compatible tools. It bootstraps a website project, audits technical
 and content health, mines Google Search Console opportunities, prepares
 reviewable improvements, notifies Bing through IndexNow, and maintains a quiet
-recurring improvement loop.
+recurring improvement loop. It also prepares audience-fit product listings and
+can assist in a visible browser while leaving identity, account creation, and
+the final public submission under the user's control.
 
 It does not promise rankings, force indexing, mass-publish low-value articles,
 or grant unrestricted production access. It is review-first by default and has
@@ -24,13 +26,19 @@ and experts discussed during the last 30 days. Normally it asks before
 publishing. If you turn on its safe automatic mode, it may choose, test, publish,
 and check one small change by itself, then undo that change if the website
 breaks. Every day it keeps notes about what worked and stops making new pages if
-the results get worse.
+the results get worse. When you want to tell a launch community about the
+product, it checks that the community is a good match, prepares honest words and
+real pictures, fills the safe parts of the form, and asks you before it creates
+an account or posts anything publicly.
 
 ## What it does
 
 - Creates a portable `.organic-search/` project configuration and run history.
 - Audits repository, deployment, crawling, canonicals, sitemaps, metadata,
-  structured data, internal links, and sampled live URLs.
+  structured data, internal links, image accessibility, HTTPS, headings,
+  sampled live URLs, and a bounded set of internal link destinations.
+- Keeps real-user Core Web Vitals separate from Lighthouse lab diagnostics and
+  requires rendered browser checks for mobile behavior and client-side schema.
 - Connects to Google Search Console through an existing connector or gcloud ADC.
 - Collects performance views by query, page, date, country, and device.
 - Finds rank 5 to 20 refresh opportunities, weak-CTR pages, declines, content
@@ -68,6 +76,11 @@ the results get worse.
 - Offers opt-in `autonomous_safe` operation with a one-action budget, green
   checks, live verification, and rollback.
 - Supports a quiet daily monitor, weekly work plan, and monthly full audit.
+- Qualifies launch and directory platforms by audience fit, prepares a portable
+  listing packet, and assists through the host browser, dedicated Playwright,
+  user-started CDP, or a manual handoff.
+- Rejects backlink packages, reciprocal badges, fake reviews, vote
+  solicitation, arbitrary signed-in identities, and unattended public posts.
 
 ## SEO and GEO
 
@@ -211,6 +224,14 @@ Use $organic-search-operator to configure its quiet daily monitor, weekly plan,
 and monthly audit for this project. Do not publish or push without approval.
 ```
 
+```text
+Use $organic-search-operator to prepare an audience-first launch campaign for
+this product. Audit the destination, recheck the current platform rules, create
+a fact-checked listing packet, and use the visible browser to fill reversible
+fields. Let me choose the account, and stop for confirmation before account
+creation and before every public submission.
+```
+
 Enable the recommended bounded autonomous mode after the deployment route and
 rollback path are confirmed:
 
@@ -289,11 +310,36 @@ python3 scripts/live_site_audit.py \
   --origin "https://www.example.com" \
   --sitemap "https://www.example.com/sitemap.xml" \
   --max-urls 100 \
+  --max-link-checks 200 \
   --output live-audit.json
 ```
 
-The audit does not render client-side JavaScript. Its internal-link counts cover
-only sampled sitemap URLs.
+The audit checks titles, descriptions, canonicals, sitemap indexability,
+headings, image alt attributes, static JSON-LD, viewport metadata, mixed
+content, HTTP-to-HTTPS behavior, sampled internal authority, duplicate sampled
+metadata, and a bounded set of same-origin link destinations. It does not
+render client-side JavaScript. Its link, duplicate, and orphan signals cover
+only the configured sample. See the
+[technical quality gate](references/technical-quality-gate.md) for severity,
+mobile, image, schema, Core Web Vitals, and URL-migration rules.
+
+### Assisted product listings
+
+Start from the portable
+[`examples/listing-packet.json`](examples/listing-packet.json). The agent audits
+the destination, revalidates the platform's official rules, records fit and
+cost, prepares factual copy and reviewed assets, and then uses the safest
+available browser adapter. It may fill reversible fields, but the user chooses
+the exact identity and confirms at the moment of account creation and final
+public submission. CAPTCHA, OTP, MFA, passkeys, payments, and identity checks
+stay with the user.
+
+The seed registry covers Product Hunt, Show HN, Peerlist, Indie Hackers,
+r/SideProject, BetaList, AlternativeTo, SaaSHub, SourceForge, DevHunt,
+OpenAlternative, SideProjectors, Startup Stash, and a set of revalidate-first
+launch catalogs. It deliberately disables link networks and reciprocal-badge
+schemes. Read [audience-first distribution and listings](references/distribution-and-listings.md)
+before a campaign because availability, rules, and prices change.
 
 ### Google Search Console
 
@@ -488,6 +534,10 @@ inclusion, ownership, conflict, size, deployment, and live-verification rules.
 - A failed autonomous deployment or live check triggers one bounded rollback
   attempt and a clear alert if restoration fails.
 - No credentials in project configuration, logs, reports, or command output.
+- No silent account identity selection, account creation, CAPTCHA/OTP/MFA
+  handling, purchase, message, or public submission.
+- No link networks, bulk backlink services, reciprocal ranking badges, vote
+  solicitation, or claims that directory DR produces rankings.
 - No doorway pages, content farms, fake reviews, fake awards, fabricated
   experience, paid-link schemes, or copied community posts.
 - No fixed publishing quota.

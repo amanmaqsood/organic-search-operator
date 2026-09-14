@@ -4,6 +4,24 @@ All notable changes follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-09-14
+
+- Added a context-aware technical quality gate covering indexability,
+  metadata, headings, internal links, bounded broken-link checks, image
+  accessibility, static structured data, mobile preconditions, HTTPS, sitemaps,
+  robots, URL-slug review, and explicit static-audit limitations.
+- Added separate field Core Web Vitals and Lighthouse lab guidance plus
+  quality-preserving image optimization and URL-migration safeguards.
+- Added audience-first launch and directory workflows with a dated platform
+  registry, fit/readiness gates, portable listing packet, browser-adapter order,
+  and qualified-outcome measurement.
+- Added hard boundaries against link schemes, reciprocal badges, vote
+  solicitation, arbitrary signed-in identities, fabricated assets, automated
+  access challenges, unattended account creation, and unattended public posts.
+- Added project distribution defaults, validation, status reporting, examples,
+  domain language, an ADR, and tests while preserving compatibility with older
+  project configurations.
+
 ## [1.4.0] - 2026-09-14
 
 - Added a provider-specific AI visibility audit for Google generative search,
@@ -71,7 +89,8 @@ All notable changes follow [Semantic Versioning](https://semver.org/).
 - Added practitioner experiment intake and `prose-humanizer` integration.
 - Added Codex, Claude Code, and manual installation guidance.
 
-[Unreleased]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.2.0...v1.3.0
