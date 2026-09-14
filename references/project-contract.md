@@ -33,6 +33,8 @@ credentials in these files.
 - IndexNow key location when deployed
 - first-run machine-readable generation policy, manifest path, detected public
   source directory, size limit, and experimental `ai.txt` status
+- AI-visibility daily monitoring, weekly decision cadence, comparison window,
+  and provider availability policy
 - recent intelligence provider, 24-hour freshness rule, and failure behavior
 - policy mode and one-action autonomous budget
 

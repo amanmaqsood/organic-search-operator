@@ -3,6 +3,10 @@
 Use these checks when the project asks for visibility in AI-assisted search,
 answer engines, or generated search experiences.
 
+For provider eligibility, first-party reports, referrals, prompt observations,
+answer-unit checks, and decision timing, also read
+[AI-assisted search visibility](ai-visibility.md).
+
 ## Meaning
 
 GEO in this skill means improving the clarity, accessibility, evidence, and
@@ -41,8 +45,8 @@ Track evidence separately:
 
 - search clicks and conversions from Google and Bing;
 - qualified referrals from AI-assisted services when analytics identify them;
-- reproducible sampled prompts, answer date, locale, model or surface, cited
-  URLs, and observed brand wording;
+- reproducible sampled prompts, answer date, locale, model or surface, session
+  context, cited URLs, and observed brand wording;
 - branded search demand and earned mentions;
 - conversions assisted by those visits.
 

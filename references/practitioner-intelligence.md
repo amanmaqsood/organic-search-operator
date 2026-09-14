@@ -36,6 +36,12 @@ data.
 The list is seeded from research performed on 2026-09-10. It is not exhaustive,
 and inclusion is not endorsement.
 
+The 2026-09-14 review of Alex Groberman's summary of a Search Engine Journal
+interview with Perplexity's Jesse Dwyer informed `PT-19` through `PT-22` below.
+The article remains a practitioner hypothesis source, not a trusted default
+watchlist addition. Its promotional examples, retrieval constants, and causal
+claims are not project evidence.
+
 ## Experiment intake
 
 For each tip, record:
@@ -109,3 +115,11 @@ indexation evidence.
 | `PT-16` | Keep a permanent page for every product or launch. | Preserve a stable canonical URL while the page remains truthful and useful. Add status, history, maker, alternatives, and related context when supported. Merge, redirect, archive, or `noindex` expired and duplicate pages according to user value instead of keeping zombie URLs forever. |
 | `PT-17` | Connect products to related entity and collection pages. | Design a crawlable contextual graph between useful parent, child, sibling, and conversion pages. Prevent orphan pages and excessive faceted combinations. Link because the relationship helps a visitor, not to circulate an abstract authority score. |
 | `PT-18` | Prefer genuinely useful pages over random generated pages. | This is a hard gate. A generated page must contain original data, functionality, analysis, or decision help that would remain useful without search traffic. Otherwise consolidate or do not publish. |
+| `PT-19` | Different people or sessions may receive different AI answers for the same question. | Treat prompt checks as provider-specific observations. Record the exact prompt, surface, model, date, locale, session state, persona, cited URLs, and brand wording; repeat when practical and never report one sample as a stable rank. |
+| `PT-20` | Search and answer systems may retrieve useful sections within a page. | Improve reader-useful answer units with descriptive headings, explicit subjects, direct qualified answers, evidence, dates, and limitations. Never force 2-to-4-word fragments, token targets, FAQ formatting, or a fixed page length. |
+| `PT-21` | Citations can differ from ordinary search rankings. | Measure each surface with its own first-party evidence when available: Google generative impressions, Bing citations and grounding queries, attributed referrals, conversions, crawler eligibility, and controlled prompt samples. Do not merge them into a universal AI score. |
+| `PT-22` | A broad body of aligned content can supply more potential answers. | Add or expand content only for distinct evidenced user value. Reject repeated explanations, one-page-per-prompt variants, and scale for its own sake; prefer improving the best matching canonical page and consolidate duplication. |
+
+For the detailed provider, answer-unit, prompt-sampling, and decision-clock
+rules behind these checks, follow
+[AI-assisted search visibility](ai-visibility.md).

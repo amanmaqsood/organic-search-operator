@@ -48,6 +48,10 @@ class BootstrapTests(unittest.TestCase):
                 config["machine_readable"]["required_files"],
                 ["llms.txt", "llms-full.txt", "ai.txt"],
             )
+            self.assertTrue(config["ai_visibility"]["monitor_daily"])
+            self.assertEqual(config["ai_visibility"]["decision_cadence"], "weekly")
+            self.assertEqual(config["ai_visibility"]["comparison_window_days"], 28)
+            self.assertEqual(config["ai_visibility"]["sampled_prompts"], "observational")
 
     def test_init_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -117,6 +121,35 @@ class BootstrapTests(unittest.TestCase):
             path.write_text(json.dumps(config), encoding="utf-8")
             errors = seo_operator.validate_project(Path(directory))
             self.assertIn("machine_readable.output_directory must be detect or stay inside the project", errors)
+
+    def test_ai_visibility_rejects_daily_content_decisions(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+            path = Path(directory) / ".organic-search" / "config.json"
+            config = json.loads(path.read_text())
+            config["ai_visibility"]["decision_cadence"] = "daily"
+            path.write_text(json.dumps(config), encoding="utf-8")
+            errors = seo_operator.validate_project(Path(directory))
+            self.assertIn("ai_visibility.decision_cadence must be weekly", errors)
+
+    def test_pre_v1_4_config_uses_ai_visibility_defaults(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with contextlib.redirect_stdout(io.StringIO()):
+                seo_operator.cmd_init(self.init_args(directory))
+            root = Path(directory) / ".organic-search"
+            config_path = root / "config.json"
+            config = json.loads(config_path.read_text())
+            del config["ai_visibility"]
+            config_path.write_text(json.dumps(config), encoding="utf-8")
+            self.assertEqual(seo_operator.validate_project(Path(directory)), [])
+
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output):
+                result = seo_operator.cmd_status(argparse.Namespace(project=directory))
+            self.assertEqual(result, 0)
+            status = json.loads(output.getvalue())
+            self.assertEqual(status["ai_visibility"], seo_operator.ai_visibility_defaults())
 
     def test_configure_machine_readable_resolves_output_directory(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

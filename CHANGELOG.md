@@ -4,6 +4,20 @@ All notable changes follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-09-14
+
+- Added a provider-specific AI visibility audit for Google generative search,
+  Bing AI Performance, ChatGPT referrals, relevant crawlers, and controlled
+  prompt observations.
+- Added answer-unit quality guidance that favors clear, evidenced sections for
+  readers while rejecting artificial micro-chunking and repeated prompt pages.
+- Added `PT-19` through `PT-22` to preserve answer variability, separate AI
+  visibility metrics, and gate content scale on distinct public value.
+- Added a daily-collection and weekly-decision clock with a configurable 28-day
+  comparison default to reduce reactions to noisy single observations.
+- Added project configuration, provider state, run-record fields, validation,
+  examples, and tests for the AI visibility policy.
+
 ## [1.3.1] - 2026-09-12
 
 - Added a post-upgrade bootstrap rule so existing projects missing any part of
@@ -57,7 +71,8 @@ All notable changes follow [Semantic Versioning](https://semver.org/).
 - Added practitioner experiment intake and `prose-humanizer` integration.
 - Added Codex, Claude Code, and manual installation guidance.
 
-[Unreleased]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.1...HEAD
+[Unreleased]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/amanmaqsood/organic-search-operator/compare/v1.1.0...v1.2.0

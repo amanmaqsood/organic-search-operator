@@ -123,3 +123,18 @@ submission, not indexing.
 The Bing Webmaster URL Submission API may be used when an existing project
 already supports it, but IndexNow is the default. Respect quotas and prioritize
 the newest or materially refreshed canonical URLs.
+
+## AI-assisted search surfaces
+
+Follow [AI-assisted search visibility](ai-visibility.md) after ordinary search
+provider setup. Inspect the Google Search generative AI inclusion control,
+Google Generative AI performance report, Bing AI Performance, attributed
+ChatGPT referrals, and relevant search crawlers when the project wants those
+surfaces.
+
+Read through an existing authorized API or connector when it exposes the
+needed data. A user-provided export is an acceptable fallback. If a report is
+available only in an authenticated UI or is absent from the current API,
+record it as unavailable to automation. Do not automate a dashboard login or
+change inclusion, robots, WAF, analytics, or account settings during an
+unattended run.

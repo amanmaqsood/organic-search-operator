@@ -51,6 +51,14 @@ the results get worse.
 - Applies eight additional checks for weekly GSC plus optional Ahrefs evidence,
   useful programmatic page families, free tools, directories, durable product
   pages, internal graphs, and agent-facing product capabilities.
+- Applies four AI-visibility checks for variable answers, reader-useful answer
+  units, provider-specific citation evidence, and anti-duplication safeguards.
+- Audits Google generative-search eligibility, Bing AI Performance,
+  `OAI-SearchBot`, `PerplexityBot`, and attributed ChatGPT referrals when the
+  required access already exists.
+- Collects AI visibility observations daily but normally makes content
+  decisions weekly from complete comparable periods instead of reacting to one
+  prompt, citation, or impression day.
 - Generates `llms.txt`, `llms-full.txt`, and experimental `ai.txt` from verified
   public canonical content on the first automation run—or the next eligible run
   for an upgraded project missing them—then keeps generator-owned files
@@ -70,7 +78,10 @@ quality work. It does not claim that an AI system will mention a brand or that a
 search engine will index a submitted URL.
 
 Read [GEO and entity guidance](references/geo-and-entity.md) for the specific
-checks and measurements.
+checks and measurements. Read
+[AI-assisted search visibility](references/ai-visibility.md) for provider
+eligibility, first-party reports, referrals, prompt observations, answer-unit
+quality, and measurement timing.
 
 ## Requirements
 
@@ -381,8 +392,8 @@ not proof that Bing indexed the URL.
 
 | Cycle | Default work |
 | --- | --- |
-| Daily at 07:00 project time | Recent intelligence, health monitor, queue update, and at most one eligible autonomous action |
-| Weekly | Opportunity plan and zero to two reviewable drafts; same-day recent research is reused |
+| Daily at 07:00 project time | Recent intelligence, health and AI-eligibility monitor, queue update, and at most one eligible autonomous action |
+| Weekly | Opportunity plan, stable AI-visibility decisions, and zero to two reviewable drafts; same-day recent research is reused |
 | Monthly | Full technical, content-drift, sitemap, provider, and practitioner audit |
 
 Every cycle consults a Last 30 Days brief. It runs fresh research once per local
@@ -405,6 +416,12 @@ durable product pages, deeper internal relationships, and real APIs or agent
 interfaces. None is automatic merely because a database can generate it. Every
 indexable page still needs distinct data, functionality, analysis, or decision
 value.
+
+Checks `PT-19` through `PT-22` handle AI-assisted search without pretending it
+has one universal ranking system. They preserve provider and session context,
+improve clear answer units without micro-chunking, keep impressions, citations,
+referrals, and conversions separate, and reject repeated one-page-per-prompt
+content.
 
 In `review_first`, the automation inspects, prioritizes, drafts, tests, and
 prepares a review. In `autonomous_safe`, it may complete one reversible action,

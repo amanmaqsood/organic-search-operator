@@ -33,6 +33,15 @@
     "max_full_bytes": 1000000,
     "ai_txt_status": "experimental_nonstandard"
   },
+  "ai_visibility": {
+    "monitor_daily": true,
+    "decision_cadence": "weekly",
+    "comparison_window_days": 28,
+    "google_genai_report": "auto_if_available",
+    "bing_ai_performance": "auto_if_available",
+    "chatgpt_referrals": "auto_if_available",
+    "sampled_prompts": "observational"
+  },
   "automation": {
     "daily_local_time": "07:00",
     "weekly_day": "Monday",

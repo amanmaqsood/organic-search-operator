@@ -43,25 +43,28 @@ directory blocks generation rather than allowing placeholders.
 5. Check deployment health, primary landing page, sitemap, robots, priority
    index states, rank 5 to 20 opportunities, high-impression weak-CTR pages, and
    material declines.
-6. Check the machine-readable manifest and generated files. Regenerate only
+6. Follow [AI-assisted search visibility](ai-visibility.md). Collect available
+   provider observations and eligibility state, but normally defer AI-specific
+   content selection to the weekly cycle and complete comparison window.
+7. Check the machine-readable manifest and generated files. Regenerate only
    when included canonical content or relevant policy changed. Verify all three
    live after an authorized deployment.
-7. Apply the `PT-01` through `PT-18` practitioner-derived checks. Look for
+8. Apply the `PT-01` through `PT-22` practitioner-derived checks. Look for
    unsupported vague claims, useful refreshes, missing contextual links,
    specific buyer questions, qualified non-branded growth, early-answer clarity,
    defensible comparisons, genuinely distinct buyer situations, useful page
    families, free tools, directories, durable product pages, and real
    agent-facing capabilities. Treat every observation as a hypothesis until
    project evidence supports it.
-8. Re-rank the queue using qualified impact, project evidence, recent
+9. Re-rank the queue using qualified impact, project evidence, recent
    intelligence, landing-page support, confidence, reversibility, and risk.
-9. Apply the configured policy. In `review_first`, prepare the appropriate
+10. Apply the configured policy. In `review_first`, prepare the appropriate
    review artifact. In `autonomous_safe`, select and complete at most one
    eligible work item, including at most one new page.
-10. Run validations and, when authorized, deploy and verify the focused change.
+11. Run validations and, when authorized, deploy and verify the focused change.
    Roll it back when deployment or live verification fails.
-11. Append the run record atomically and update current state.
-12. Notify only for a meaningful change, completed review artifact or
+12. Append the run record atomically and update current state.
+13. Notify only for a meaningful change, completed review artifact or
     autonomous action, failure, quota problem, rollback, or required user action.
 
 ## External actions
@@ -98,6 +101,8 @@ Include:
 - machine-readable manifest source hash, generated-file hashes, conflict state,
   changed files, and live verification;
 - GSC setup and property state;
+- provider-specific AI visibility eligibility, evidence window, observations,
+  report limitations, and decision state;
 - opportunities added, changed, rejected, or blocked;
 - opportunity score components and authorization source;
 - pages drafted, refreshed, approved, published, and verified;

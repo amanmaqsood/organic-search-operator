@@ -132,6 +132,18 @@ def machine_readable_defaults() -> dict:
     }
 
 
+def ai_visibility_defaults() -> dict:
+    return {
+        "monitor_daily": True,
+        "decision_cadence": "weekly",
+        "comparison_window_days": 28,
+        "google_genai_report": "auto_if_available",
+        "bing_ai_performance": "auto_if_available",
+        "chatgpt_referrals": "auto_if_available",
+        "sampled_prompts": "observational",
+    }
+
+
 def valid_project_relative_path(value: object, allow_detect: bool = False) -> bool:
     if not isinstance(value, str) or not value.strip():
         return False
@@ -174,6 +186,7 @@ def initial_config(args: argparse.Namespace) -> dict:
             "key_location": "",
         },
         "machine_readable": machine_readable_defaults(),
+        "ai_visibility": ai_visibility_defaults(),
         "automation": {
             "daily_local_time": "07:00",
             "weekly_day": "Monday",
@@ -202,8 +215,12 @@ def initial_state() -> dict:
         "queue": [],
         "provider_state": {
             "google_search_console": {"status": "unconfigured"},
+            "google_genai": {"status": "unconfigured"},
             "indexnow": {"status": "unconfigured"},
             "bing_webmaster": {"status": "optional"},
+            "bing_ai_performance": {"status": "optional"},
+            "chatgpt_referrals": {"status": "optional"},
+            "sampled_prompts": {"status": "optional"},
         },
     }
 
@@ -372,6 +389,28 @@ def validate_project(project: Path) -> list[str]:
             if machine.get("ai_txt_status") != "experimental_nonstandard":
                 errors.append("machine_readable.ai_txt_status must be experimental_nonstandard")
 
+    ai_visibility = config.get("ai_visibility")
+    if ai_visibility is not None:
+        if not isinstance(ai_visibility, dict):
+            errors.append("ai_visibility must be an object")
+        else:
+            if ai_visibility.get("monitor_daily") is not True:
+                errors.append("ai_visibility.monitor_daily must be true")
+            if ai_visibility.get("decision_cadence") != "weekly":
+                errors.append("ai_visibility.decision_cadence must be weekly")
+            comparison_days = ai_visibility.get("comparison_window_days")
+            if not isinstance(comparison_days, int) or not 7 <= comparison_days <= 90:
+                errors.append("ai_visibility.comparison_window_days must be between 7 and 90")
+            for field in (
+                "google_genai_report",
+                "bing_ai_performance",
+                "chatgpt_referrals",
+            ):
+                if ai_visibility.get(field) != "auto_if_available":
+                    errors.append(f"ai_visibility.{field} must be auto_if_available")
+            if ai_visibility.get("sampled_prompts") != "observational":
+                errors.append("ai_visibility.sampled_prompts must be observational")
+
     gsc_property = config.get("search_console", {}).get("property", "")
     if gsc_property and not (
         gsc_property.startswith("sc-domain:")
@@ -413,6 +452,7 @@ def cmd_status(args: argparse.Namespace) -> int:
             "recent_intelligence", recent_intelligence_defaults()
         ),
         "machine_readable": config.get("machine_readable", machine_readable_defaults()),
+        "ai_visibility": config.get("ai_visibility", ai_visibility_defaults()),
         "gsc_property": config["search_console"]["property"] or "unconfigured",
         "indexnow": state.get("provider_state", {}).get("indexnow", {}).get("status", "unknown"),
         "queue_size": len(state.get("queue", [])),

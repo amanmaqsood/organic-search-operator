@@ -64,6 +64,23 @@ dates, permission errors, quota limits, or verification blockers as such. Never
 claim a property is verified, a sitemap is submitted, or a URL is indexed
 without provider evidence.
 
+Follow ai-visibility.md. On the first eligible run, inspect the Google Search
+generative AI inclusion control and report availability, Bing AI Performance,
+OAI-SearchBot and PerplexityBot access, relevant WAF behavior, crawlable
+rendered content, and analytics attribution for utm_source=chatgpt.com. Use an
+existing authorized API or connector when it exposes the data, or a
+user-provided export. Never automate a login or change an inclusion control,
+crawler policy, WAF, account, property, or analytics configuration unattended.
+Record unsupported or UI-only data as unavailable to automation.
+
+Collect available AI visibility observations during the daily monitor. Keep
+Google generative impressions, Bing citations and grounding queries, ChatGPT
+referrals and conversions, crawler eligibility, and prompt samples separate.
+Normally make AI-specific content decisions during the weekly cycle using
+complete comparable periods and a 28-day default window adapted to project
+volume and seasonality. Never treat one prompt answer, citation, or impression
+day as a stable rank.
+
 Inspect the primary landing page, robots.txt, sitemap, priority URL health, and
 recent Search Console performance. Analyze complete periods by compatible views,
 including query plus page, page, country, and device when relevant. Prioritize
@@ -87,7 +104,7 @@ deployment, or rollback risk. A blocking crawl, indexability, security, or
 conversion failure may override the score. When scores tie, prefer an existing
 page refresh, then internal-link or technical work, then a new page.
 
-Apply the PT-01 through PT-18 checks in practitioner-intelligence.md before
+Apply the PT-01 through PT-22 checks in practitioner-intelligence.md before
 selecting the action. Audit vague claims, but add a number only when it is real,
 scoped, dated, and sourced. Evaluate comparison and best-tools content as
 commercial-intent experiments, never as guaranteed winners. Prefer a materially
@@ -105,6 +122,13 @@ facts: no assumed 9x comparison-page return, 10-to-15-position refresh jump,
 top-ranked listicle trains ChatGPT, or claim that silence makes a model forget a
 brand. Log them as unverified source claims if they are material to an
 experiment.
+
+For PT-19 through PT-22, preserve provider and context differences, improve
+reader-useful answer units rather than creating tiny token chunks, measure
+citations separately from rankings and conversions, and reject repeated or
+scaled pages without distinct public value. Use prompts and grounding queries
+to improve the best existing canonical page instead of creating one URL per
+variation.
 
 For PT-11 through PT-18, treat optional Ahrefs data as a separate supporting
 provider, evaluate page families with sparse and rich records, and require real

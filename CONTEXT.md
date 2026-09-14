@@ -53,6 +53,16 @@ _Avoid_: Publishing quota, content target
 The coordinated `llms.txt`, `llms-full.txt`, and experimental `ai.txt` files generated from verified public canonical content for compatible agents.
 _Avoid_: AI sitemap, ranking file, guaranteed citation feed
 
+**AI visibility observation**:
+A provider-specific impression, citation, referral, conversion, crawler result,
+or reproducible prompt sample with its date, surface, and measurement limits.
+_Avoid_: AI rank, universal visibility score
+
+**Answer unit**:
+A coherent reader-useful section with enough subject, context, evidence, and
+qualification to remain understandable when a search system surfaces it.
+_Avoid_: Token chunk, snippet farm
+
 **Discovery manifest**:
 The reviewed source record that identifies which public, canonical, indexable pages and facts may appear in the machine-readable discovery set.
 _Avoid_: Site scrape, private content dump

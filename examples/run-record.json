@@ -21,6 +21,14 @@
     "gsc_final_data_through": "2026-09-07",
     "live_site_checked_at": "2026-09-10T07:00:00Z"
   },
+  "ai_visibility": {
+    "decision_state": "monitor_only",
+    "comparison_window_days": 28,
+    "google_genai": {"status": "unavailable"},
+    "bing_ai_performance": {"status": "unavailable"},
+    "chatgpt_referrals": {"status": "unavailable"},
+    "sampled_prompts": {"status": "not_run"}
+  },
   "changes": [],
   "approvals_needed": [],
   "blockers": [],

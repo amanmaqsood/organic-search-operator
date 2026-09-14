@@ -75,6 +75,24 @@ Keep provider metrics separate because their databases and estimates differ.
 Thresholds are defaults, not universal truths. Scale them to the site's data
 volume and record any change.
 
+### AI-assisted search visibility
+
+Follow [AI-assisted search visibility](ai-visibility.md). Keep Google
+generative impressions, Bing citations and grounding queries, ChatGPT referral
+sessions and conversions, crawler eligibility, and sampled prompts as separate
+observations.
+
+Collect available evidence during the daily monitor. Unless a crawl or access
+blocker requires immediate repair, evaluate an AI-specific content change in
+the weekly cycle using complete comparable periods. Use 28 days as the default
+comparison window when volume and seasonality make it meaningful, and record
+any adapted window.
+
+Use an observed grounding query or prompt to inspect the best existing
+canonical page. Improve its answer units when doing so makes the page clearer
+and more useful to people. Do not create a page for every phrase or infer that
+one provider's citation behavior is a universal ranking system.
+
 ## Opportunity record
 
 Each candidate needs:

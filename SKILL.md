@@ -55,11 +55,12 @@ Read only the references needed for the selected route:
 - [Audit and opportunity model](references/audit-and-planning.md)
 - [Content and editorial policy](references/content-and-editorial.md)
 - [GEO and entity guidance](references/geo-and-entity.md)
+- [AI-assisted search visibility](references/ai-visibility.md)
 - [Machine-readable discovery set](references/machine-readable-discovery.md)
 - [Automation and state](references/automation-and-state.md)
 - [Automation prompt template](references/automation-prompt-template.md)
 - [Recent intelligence and autonomous action](references/recent-intelligence.md)
-- [Practitioner intelligence and PT-01 through PT-18 decision checks](references/practitioner-intelligence.md)
+- [Practitioner intelligence and PT-01 through PT-22 decision checks](references/practitioner-intelligence.md)
 - [Report contract](references/report-contract.md)
 
 ## Bootstrap
@@ -98,6 +99,9 @@ Follow [Search provider setup](references/search-provider-setup.md).
   Console scopes. Capture tokens inside scripts; never print them.
 - Read performance by query, page, date, country, and device as separate useful
   views. Mark incomplete dates as partial.
+- Follow [AI-assisted search visibility](references/ai-visibility.md) to inspect
+  Google generative-search eligibility, available first-party AI reports,
+  attributed referrals, and crawler access without automating login flows.
 - Use URL Inspection only for selective diagnosis. It reports state and does
   not request indexing for ordinary pages.
 - Use sitemap discovery and submission for Google. Use IndexNow for Bing and
@@ -120,11 +124,13 @@ Collect evidence in this order:
    internal authority;
 5. current SERP shape, competitors, and gaps;
 6. content inventory, duplication, cannibalization, decay, and orphan pages;
-7. optional Bing, AI-assisted search, backlink/entity, and
-   practitioner-experiment evidence.
-8. a current Last 30 Days brief for scheduled cycles, treated as supporting
+7. provider-specific AI visibility observations, including available Google
+   generative impressions, Bing citations, attributed referrals, crawler
+   eligibility, and controlled prompt samples;
+8. optional backlink/entity and practitioner-experiment evidence;
+9. a current Last 30 Days brief for scheduled cycles, treated as supporting
    evidence rather than proof of demand.
-9. practitioner-derived PT-01 through PT-18 checks, with unsupported numeric and
+10. practitioner-derived PT-01 through PT-22 checks, with unsupported numeric and
    causal claims rejected rather than converted into quotas.
 
 Produce a ranked queue. Prefer, in order:
@@ -172,12 +178,18 @@ For every scheduled cycle, follow
 Apply the decision checks in
 [Practitioner intelligence](references/practitioner-intelligence.md) when
 building and selecting from the queue.
+Follow [AI-assisted search visibility](references/ai-visibility.md) for the
+daily eligibility and data collection pass and the weekly evidence-based
+decision pass.
 On the first scheduled run and after relevant canonical content changes, follow
 [Machine-readable discovery set](references/machine-readable-discovery.md).
 
 - Default rhythm: quiet daily monitor at 07:00 project-local time, weekly action
   plan and drafting batch, monthly full audit and baseline refresh.
 - Stay silent when daily state is unchanged and no action is required.
+- Collect available AI visibility observations daily, but normally choose
+  AI-specific content work during the weekly cycle from complete comparable
+  periods. Do not react to one prompt answer, citation, or impression day.
 - Every cycle must consult a Last 30 Days brief that is no more than 24 hours
   old. Reuse the same-day brief instead of repeating paid or slow source calls.
 - The first run creates all three machine-readable discovery files. An existing
@@ -208,6 +220,9 @@ Before reporting success, verify:
 - build and relevant tests pass;
 - external actions are distinguished as completed, pending, blocked, or merely
   proposed;
+- AI impressions, citations, referrals, conversions, crawler checks, and prompt
+  samples remain provider-specific and are never collapsed into an invented
+  universal rank;
 - the run report and next queue are recorded.
 
 If a required data source is unavailable, label it unavailable. Do not turn
